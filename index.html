@@ -475,11 +475,153 @@
     .card:nth-child(9) { animation-delay: 0.45s; }
     .card:nth-child(10) { animation-delay: 0.50s; }
 
+    /* ── Chart Section ── */
+    .chart-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 52px 24px 44px;
+    }
+    .chart-inner { max-width: 820px; margin: 0 auto; }
+    .chart-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .chart-title { font-size: 1.4rem; font-weight: 700; color: var(--duke-blue); margin-bottom: 4px; }
+    .chart-subtitle { font-family: 'Arial', sans-serif; font-size: 0.83rem; color: var(--gray-600); }
+    .chart-legend {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1.5px solid transparent;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .legend-item:hover { background: var(--gray-100); color: var(--gray-800); }
+    .legend-item.active { border-color: currentColor; color: var(--gray-800); background: var(--gray-100); }
+    .legend-item.active.le-energy { color: var(--amber); background: var(--amber-light); border-color: var(--amber); }
+    .legend-item.active.le-resilience { color: var(--green); background: var(--green-light); border-color: var(--green); }
+    .legend-item.active.le-justice { color: var(--purple); background: #f3eafd; border-color: var(--purple); }
+    .legend-item.active.le-data { color: var(--teal); background: #e6f7fa; border-color: var(--teal); }
+    .legend-item.active.le-athletics { color: var(--duke-blue); background: #e8ecf4; border-color: var(--duke-blue); }
+    .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+    .chart-bars { display: flex; flex-direction: column; gap: 8px; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 210px 1fr 38px;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 6px 4px;
+      transition: opacity 0.35s, background 0.15s;
+    }
+    .bar-row:hover { background: var(--gray-100); }
+    .bar-row:hover .bar-fill { filter: brightness(1.08); }
+    .bar-row.dimmed { opacity: 0.18; pointer-events: none; }
+    .bar-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.77rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      text-align: right;
+      line-height: 1.3;
+      padding-right: 2px;
+    }
+    .bar-label small {
+      display: block;
+      font-weight: 400;
+      color: var(--gray-600);
+      font-size: 0.67rem;
+      margin-top: 1px;
+    }
+    .bar-track {
+      background: var(--gray-100);
+      border-radius: 999px;
+      height: 30px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      width: 0;
+      transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .bar-fill.animated { width: var(--tw); }
+    .bar-fill.p-energy    { background: linear-gradient(90deg, #e67e22, #f5a623); }
+    .bar-fill.p-resilience { background: linear-gradient(90deg, #27ae60, #52c97b); }
+    .bar-fill.p-justice   { background: linear-gradient(90deg, #8e44ad, #b163d0); }
+    .bar-fill.p-data      { background: linear-gradient(90deg, #1a7a8a, #22aabf); }
+    .bar-fill.p-athletics { background: linear-gradient(90deg, #012169, #1a4a9e); }
+
+    .bar-count {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+    .chart-footer {
+      margin-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--gray-200);
+      padding-top: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chart-total {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gray-600);
+    }
+    .chart-total strong { color: var(--duke-blue); }
+    .sort-toggle {
+      display: flex;
+      gap: 4px;
+    }
+    .sort-btn {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--gray-200);
+      background: none;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .sort-btn.active { background: var(--duke-blue); color: var(--white); border-color: var(--duke-blue); }
+    .sort-btn:hover:not(.active) { border-color: var(--duke-blue); color: var(--duke-blue); }
+
     @media (max-width: 600px) {
       .hero { padding: 56px 20px 44px; }
       .hero-stats { gap: 24px; }
       .cards-grid { grid-template-columns: 1fr; }
       .modal-body { padding: 20px; }
+      .bar-row { grid-template-columns: 110px 1fr 28px; gap: 8px; }
+      .bar-label { font-size: 0.67rem; }
+      .bar-track { height: 22px; }
+      .chart-header { flex-direction: column; }
     }
   </style>
 </head>
@@ -508,6 +650,33 @@
     </div>
   </div>
 </header>
+
+<!-- ═══════════════════════════ CHART ═══════════════════════════ -->
+<section class="chart-section">
+  <div class="chart-inner">
+    <div class="chart-header">
+      <div>
+        <h2 class="chart-title">Impact by the Numbers</h2>
+        <p class="chart-subtitle">Documented public climate wins per area — click any bar to explore all sources</p>
+      </div>
+      <div class="chart-legend">
+        <button class="legend-item le-energy" data-pillar="p-energy"><span class="legend-dot dot-energy"></span>Energy</button>
+        <button class="legend-item le-resilience" data-pillar="p-resilience"><span class="legend-dot dot-resilience"></span>Resilience</button>
+        <button class="legend-item le-justice" data-pillar="p-justice"><span class="legend-dot dot-justice"></span>Justice</button>
+        <button class="legend-item le-data" data-pillar="p-data"><span class="legend-dot dot-data"></span>Data</button>
+        <button class="legend-item le-athletics" data-pillar="p-athletics"><span class="legend-dot dot-athletics"></span>Athletics</button>
+      </div>
+    </div>
+    <div class="chart-bars" id="chart-bars"></div>
+    <div class="chart-footer">
+      <span class="chart-total"><strong>193</strong> documented wins across 10 areas</span>
+      <div class="sort-toggle">
+        <button class="sort-btn active" data-sort="wins">Sort: Most Wins</button>
+        <button class="sort-btn" data-sort="alpha">A–Z</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <nav class="pillars">
   <div class="pillars-inner">
@@ -1053,6 +1222,87 @@
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── Chart ── */
+  const CHART_ORDER_WINS  = ['pratt','sanford','scales','athletics','nicholas','nicholas-institute','operations','marine','fuqua','chemistry'];
+  const CHART_ORDER_ALPHA = [...CHART_ORDER_WINS].sort((a,b) => DATA[a].school.localeCompare(DATA[b].school));
+  const MAX_WINS = 25;
+
+  const SHORT_NAMES = {
+    pratt: ['Pratt Engineering', 'DESIGN Climate & MEng C&S'],
+    sanford: ['Sanford Public Policy', 'Climate Policy & Justice'],
+    scales: ['SCALES / SCALe', 'Cross-University Programs'],
+    athletics: ['Duke Athletics', 'Athletics Climate Team'],
+    nicholas: ['Nicholas School', 'Environment & Ecosystems'],
+    'nicholas-institute': ['Nicholas Institute', 'Climate TRACE & Heat Policy'],
+    operations: ['Campus Operations', 'Office of Climate & Sustainability'],
+    marine: ['Duke Marine Lab', 'Oceans & Coastal Resilience'],
+    fuqua: ['Fuqua Business', 'ClimateCAP & MBCS'],
+    chemistry: ['Chemistry Dept.', 'Renewable Energy Research'],
+  };
+
+  let chartFilter = null;
+  let chartSort   = 'wins';
+
+  function renderChart() {
+    const order = chartSort === 'alpha' ? CHART_ORDER_ALPHA : CHART_ORDER_WINS;
+    const container = document.getElementById('chart-bars');
+    container.innerHTML = '';
+
+    order.forEach(id => {
+      const d   = DATA[id];
+      const pct = ((d.total / MAX_WINS) * 100).toFixed(1);
+      const dim = chartFilter && d.pillar !== chartFilter;
+      const [name, sub] = SHORT_NAMES[id];
+
+      const row = document.createElement('div');
+      row.className = 'bar-row' + (dim ? ' dimmed' : '');
+      row.dataset.id = id;
+      row.innerHTML = `
+        <div class="bar-label">${name}<small>${sub}</small></div>
+        <div class="bar-track">
+          <div class="bar-fill ${d.pillar}" style="--tw:${pct}%"></div>
+        </div>
+        <div class="bar-count">${d.total}</div>`;
+      row.addEventListener('click', () => openModal(id));
+      container.appendChild(row);
+    });
+
+    requestAnimationFrame(() => {
+      container.querySelectorAll('.bar-fill').forEach((fill, i) => {
+        setTimeout(() => fill.classList.add('animated'), 60 + i * 55);
+      });
+    });
+  }
+
+  renderChart();
+
+  /* legend filter */
+  document.querySelectorAll('.legend-item').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const p = btn.dataset.pillar;
+      if (chartFilter === p) {
+        chartFilter = null;
+        document.querySelectorAll('.legend-item').forEach(l => l.classList.remove('active'));
+      } else {
+        chartFilter = p;
+        document.querySelectorAll('.legend-item').forEach(l => l.classList.toggle('active', l.dataset.pillar === p));
+      }
+      document.querySelectorAll('.bar-row').forEach(r => {
+        r.classList.toggle('dimmed', !!chartFilter && DATA[r.dataset.id].pillar !== chartFilter);
+        r.style.pointerEvents = (chartFilter && DATA[r.dataset.id].pillar !== chartFilter) ? 'none' : '';
+      });
+    });
+  });
+
+  /* sort toggle */
+  document.querySelectorAll('.sort-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      chartSort = btn.dataset.sort;
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === chartSort));
+      renderChart();
+    });
+  });
 </script>
 
 </body>
