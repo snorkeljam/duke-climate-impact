@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Duke Climate Commitment — Impact Across Campus</title>
+  <style>
+    :root {
+      --duke-blue: #012169;
+      --duke-blue-light: #0a3a8a;
+      --duke-navy: #001457;
+      --duke-accent: #993399;
+      --green: #2d8a4e;
+      --green-light: #e8f5ed;
+      --teal: #1a7a8a;
+      --amber: #b5620c;
+      --amber-light: #fef3e2;
+      --purple: #5a3580;
+      --gray-100: #f4f6fa;
+      --gray-200: #e8ecf4;
+      --gray-600: #5a6278;
+      --gray-800: #1e2433;
+      --white: #ffffff;
+      --radius: 12px;
+      --shadow: 0 4px 24px rgba(1,33,105,0.10);
+      --shadow-hover: 0 8px 36px rgba(1,33,105,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--gray-100);
+      color: var(--gray-800);
+      line-height: 1.6;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--duke-navy) 0%, var(--duke-blue) 55%, #1a4a9e 100%);
+      color: var(--white);
+      padding: 80px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      font-family: 'Arial', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: #7eb8f7;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 640px;
+      margin: 0 auto 32px;
+      opacity: 0.88;
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #7eb8f7;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    /* ── Pillars Strip ── */
+    .pillars {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+    }
+    .pillars-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .pillars-inner::-webkit-scrollbar { display: none; }
+    .pillar-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 18px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .pillar-btn:hover { color: var(--duke-blue); }
+    .pillar-btn.active { color: var(--duke-blue); border-bottom-color: var(--duke-blue); }
+    .pillar-btn .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Main Content ── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--duke-blue);
+    }
+    .section-count {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.82rem;
+      color: var(--gray-600);
+    }
+
+    /* ── Cards Grid ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card.hidden {
+      display: none;
+    }
+
+    .card-accent {
+      height: 5px;
+    }
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-school {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--gray-600);
+      flex: 1;
+      line-height: 1.65;
+    }
+    .card-footer {
+      padding: 14px 24px;
+      background: var(--gray-100);
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .tag {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Pillar color themes */
+    .p-energy .card-accent { background: linear-gradient(90deg, #e67e22, #f39c12); }
+    .p-energy .card-school { color: #b5620c; }
+    .p-energy .tag { background: var(--amber-light); color: var(--amber); }
+
+    .p-resilience .card-accent { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+    .p-resilience .card-school { color: var(--green); }
+    .p-resilience .tag { background: var(--green-light); color: var(--green); }
+
+    .p-justice .card-accent { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
+    .p-justice .card-school { color: var(--purple); }
+    .p-justice .tag { background: #f3eafd; color: var(--purple); }
+
+    .p-data .card-accent { background: linear-gradient(90deg, var(--teal), #1abc9c); }
+    .p-data .card-school { color: var(--teal); }
+    .p-data .tag { background: #e6f7fa; color: var(--teal); }
+
+    /* Pillar dot colors */
+    .dot-energy { background: #e67e22; }
+    .dot-resilience { background: var(--green); }
+    .dot-justice { background: var(--purple); }
+    .dot-data { background: var(--teal); }
+    .dot-all { background: var(--duke-blue); }
+
+    /* ── Commitment Strip ── */
+    .commitment-strip {
+      background: linear-gradient(135deg, var(--duke-blue) 0%, var(--duke-navy) 100%);
+      color: var(--white);
+      padding: 56px 24px;
+      text-align: center;
+      margin-top: 0;
+    }
+    .commitment-strip h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .commitment-strip p {
+      max-width: 580px;
+      margin: 0 auto;
+      opacity: 0.85;
+      font-size: 0.98rem;
+    }
+    .commitment-link {
+      display: inline-block;
+      margin-top: 24px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 28px;
+      border-radius: 999px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .commitment-link:hover { background: rgba(255,255,255,0.25); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--gray-800);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 24px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+    }
+    footer a { color: rgba(255,255,255,0.75); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .card { animation: fadeUp 0.4s ease both; }
+    .card:nth-child(1) { animation-delay: 0.05s; }
+    .card:nth-child(2) { animation-delay: 0.10s; }
+    .card:nth-child(3) { animation-delay: 0.15s; }
+    .card:nth-child(4) { animation-delay: 0.20s; }
+    .card:nth-child(5) { animation-delay: 0.25s; }
+    .card:nth-child(6) { animation-delay: 0.30s; }
+    .card:nth-child(7) { animation-delay: 0.35s; }
+    .card:nth-child(8) { animation-delay: 0.40s; }
+    .card:nth-child(9) { animation-delay: 0.45s; }
+
+    @media (max-width: 600px) {
+      .hero { padding: 56px 20px 44px; }
+      .hero-stats { gap: 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<header class="hero">
+  <div class="hero-badge">Duke University</div>
+  <h1>Where <em>Climate Action</em><br>Meets Academic Excellence</h1>
+  <p>Discover how Duke's schools, institutes, and labs are advancing the Duke Climate Commitment — working toward a carbon-neutral, resilient world by 2030.</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">10+</span>
+      <span class="stat-label">Schools Engaged</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4</span>
+      <span class="stat-label">Strategic Pillars</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2030</span>
+      <span class="stat-label">Carbon-Neutral Goal</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">$10.45M</span>
+      <span class="stat-label">SCALES Investment</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ PILLAR FILTER ═══════════════════════════ -->
+<nav class="pillars">
+  <div class="pillars-inner">
+    <button class="pillar-btn active" data-filter="all">
+      <span class="dot dot-all"></span> All Areas
+    </button>
+    <button class="pillar-btn" data-filter="energy">
+      <span class="dot dot-energy"></span> Transforming Energy
+    </button>
+    <button class="pillar-btn" data-filter="resilience">
+      <span class="dot dot-resilience"></span> Climate-Resilient Communities
+    </button>
+    <button class="pillar-btn" data-filter="justice">
+      <span class="dot dot-justice"></span> Environmental Justice
+    </button>
+    <button class="pillar-btn" data-filter="data">
+      <span class="dot dot-data"></span> Data-Driven Solutions
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════ CARDS ═══════════════════════════ -->
+<main class="main">
+  <div class="section-header">
+    <h2 class="section-title">Campus Climate Leaders</h2>
+    <span class="section-count" id="card-count">Showing all 9 areas</span>
+  </div>
+
+  <div class="cards-grid" id="cards-grid">
+
+    <!-- 1 Nicholas School -->
+    <article class="card p-resilience" data-pillar="resilience">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Nicholas School of the Environment</div>
+        <h3>Climate Research &amp; Environmental Leadership</h3>
+        <p>Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. The 2025 State of the Climate Commitment report spotlights Nicholas faculty driving breakthroughs from coastal resilience to carbon accounting.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Flagship Partner</span>
+        <span class="tag">Policy &amp; Ecosystems</span>
+        <span class="tag">2025 Annual Report</span>
+      </div>
+    </article>
+
+    <!-- 2 Fuqua -->
+    <article class="card p-justice" data-pillar="justice">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Fuqua School of Business</div>
+        <h3>ClimateCAP &amp; MBA Sustainability Program</h3>
+        <p>The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint 10-month Master in Business, Climate, and Sustainability with the Nicholas School bridges management and environmental science.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Business Education</span>
+        <span class="tag">48 Partner Schools</span>
+        <span class="tag">Joint Degree</span>
+      </div>
+    </article>
+
+    <!-- 3 Pratt Engineering -->
+    <article class="card p-energy" data-pillar="energy">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Pratt School of Engineering</div>
+        <h3>DESIGN Climate &amp; Clean-Energy Engineering</h3>
+        <p>DESIGN Climate — a $750K initiative co-sponsored with the Nicholas School — deploys interdisciplinary student-faculty teams on real client climate challenges. Pratt faculty also collaborate on high-resolution remote sensing platforms to monitor ecological change.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">$750K Initiative</span>
+        <span class="tag">Remote Sensing</span>
+        <span class="tag">Design Thinking</span>
+      </div>
+    </article>
+
+    <!-- 4 Chemistry -->
+    <article class="card p-energy" data-pillar="energy">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Department of Chemistry</div>
+        <h3>Next-Generation Renewable Energy Research</h3>
+        <p>Faculty including David Beratan, Jie Liu, Ivan Moreno-Hernandez, and Michael Therien are exploring novel materials and molecular systems for renewable energy conversion — from solar harvesting to advanced battery chemistries — under the Climate Commitment's energy pillar.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Solar Energy</span>
+        <span class="tag">Materials Science</span>
+        <span class="tag">Clean Tech</span>
+      </div>
+    </article>
+
+    <!-- 5 Marine Lab -->
+    <article class="card p-resilience" data-pillar="resilience">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Duke Marine Lab</div>
+        <h3>Oceans@Duke &amp; Coastal Resilience</h3>
+        <p>Oceans@Duke has catalyzed interdisciplinary ocean research and student engagement since 2020. The Marine Lab also leads <em>Ready, Set, Resilience</em> — a K-12 community science program partnering with NC public schools and resilience practitioners to build climate-ready communities.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Ocean Science</span>
+        <span class="tag">K–12 Outreach</span>
+        <span class="tag">Community Science</span>
+      </div>
+    </article>
+
+    <!-- 6 Nicholas Institute -->
+    <article class="card p-data" data-pillar="data">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Nicholas Institute for Energy, Environment &amp; Sustainability</div>
+        <h3>Climate TRACE &amp; Data-Driven Policy</h3>
+        <p>The Nicholas Institute coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities. It anchors Climate TRACE — a global initiative using satellite and AI-driven data to track greenhouse gas emissions at source level across every country.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Climate TRACE</span>
+        <span class="tag">AI &amp; Satellites</span>
+        <span class="tag">Policy Bridge</span>
+      </div>
+    </article>
+
+    <!-- 7 Sanford -->
+    <article class="card p-justice" data-pillar="justice">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Sanford School of Public Policy</div>
+        <h3>Climate Policy, Health &amp; Environmental Justice</h3>
+        <p>Sanford is identified as a school with "distinct advantages" in climate policy and health justice. Faculty research spans energy transition governance, climate health disparities, and equitable distribution of mitigation burdens — directly informing local and national policy.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">Public Policy</span>
+        <span class="tag">Health Equity</span>
+        <span class="tag">Governance</span>
+      </div>
+    </article>
+
+    <!-- 8 SCALES -->
+    <article class="card p-data" data-pillar="data">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">University-Wide Initiative</div>
+        <h3>SCALES — Scholars for Climate &amp; Advanced Leadership</h3>
+        <p>A $10.45 million investment recruits outstanding early-career scholars across Duke's 10+ schools to advance climate breakthroughs through collaborative research partnerships. SCALES builds the next generation of climate scientists, engineers, policymakers, and advocates.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">$10.45M</span>
+        <span class="tag">Early-Career Scholars</span>
+        <span class="tag">Cross-School</span>
+      </div>
+    </article>
+
+    <!-- 9 Sustainable Operations -->
+    <article class="card p-energy" data-pillar="energy">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Office of Climate &amp; Sustainability</div>
+        <h3>Sustainable Campus Operations</h3>
+        <p>Duke targets a 20% reduction in building energy use (pre-2009 stock) by 2030, alongside low-carbon construction standards for new facilities. The Office coordinates energy efficiency audits, renewable procurement, and the Climate &amp; Sustainability Fluency Framework for all students.</p>
+      </div>
+      <div class="card-footer">
+        <span class="tag">20% Energy Reduction</span>
+        <span class="tag">Green Buildings</span>
+        <span class="tag">Campus Ops</span>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<!-- ═══════════════════════════ CTA STRIP ═══════════════════════════ -->
+<section class="commitment-strip">
+  <h2>The Duke Climate Commitment</h2>
+  <p>Launched in 2022, Duke's university-wide initiative unites research, education, operations, and community action to place society on the path toward a resilient, carbon-neutral world.</p>
+  <a class="commitment-link" href="https://climate.duke.edu" target="_blank" rel="noopener">
+    Explore the Full Commitment &rarr;
+  </a>
+</section>
+
+<footer>
+  <p>Content drawn from the <a href="https://climate.duke.edu/annual-report-2025/" target="_blank" rel="noopener">2025 State of the Duke Climate Commitment</a> and official Duke University sources. Not an official Duke publication.</p>
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.pillar-btn');
+  const cards   = document.querySelectorAll('.card');
+  const counter = document.getElementById('card-count');
+
+  function updateCount(visible) {
+    counter.textContent = `Showing ${visible} area${visible !== 1 ? 's' : ''}`;
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active button
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Filter cards
+      let count = 0;
+      cards.forEach(card => {
+        const match = filter === 'all' || card.dataset.pillar === filter;
+        card.classList.toggle('hidden', !match);
+        if (match) count++;
+      });
+
+      updateCount(count);
+    });
+  });
+
+  // Init count
+  updateCount(cards.length);
+</script>
+
+</body>
+</html>
