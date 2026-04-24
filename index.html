@@ -9,7 +9,6 @@
       --duke-blue: #012169;
       --duke-blue-light: #0a3a8a;
       --duke-navy: #001457;
-      --duke-accent: #993399;
       --green: #2d8a4e;
       --green-light: #e8f5ed;
       --teal: #1a7a8a;
@@ -23,7 +22,7 @@
       --white: #ffffff;
       --radius: 12px;
       --shadow: 0 4px 24px rgba(1,33,105,0.10);
-      --shadow-hover: 0 8px 36px rgba(1,33,105,0.18);
+      --shadow-hover: 0 8px 36px rgba(1,33,105,0.22);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,6 +48,7 @@
       position: absolute;
       inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
     }
     .hero-badge {
       display: inline-block;
@@ -70,10 +70,7 @@
       margin-bottom: 16px;
       letter-spacing: -0.5px;
     }
-    .hero h1 em {
-      font-style: normal;
-      color: #7eb8f7;
-    }
+    .hero h1 em { font-style: normal; color: #7eb8f7; }
     .hero p {
       font-size: 1.1rem;
       max-width: 640px;
@@ -86,9 +83,7 @@
       gap: 40px;
       flex-wrap: wrap;
     }
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
     .stat-num {
       font-size: 2.2rem;
       font-weight: 700;
@@ -108,6 +103,9 @@
       background: var(--white);
       border-bottom: 1px solid var(--gray-200);
       padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
     .pillars-inner {
       max-width: 1100px;
@@ -148,7 +146,6 @@
       margin: 0 auto;
       padding: 48px 24px 80px;
     }
-
     .section-header {
       display: flex;
       align-items: baseline;
@@ -157,16 +154,8 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--duke-blue);
-    }
-    .section-count {
-      font-family: 'Arial', sans-serif;
-      font-size: 0.82rem;
-      color: var(--gray-600);
-    }
+    .section-title { font-size: 1.4rem; font-weight: 700; color: var(--duke-blue); }
+    .section-count { font-family: 'Arial', sans-serif; font-size: 0.82rem; color: var(--gray-600); }
 
     /* ── Cards Grid ── */
     .cards-grid {
@@ -180,28 +169,20 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow: hidden;
-      transition: transform 0.25s, box-shadow 0.25s, opacity 0.3s;
+      transition: transform 0.25s, box-shadow 0.25s;
       display: flex;
       flex-direction: column;
-      cursor: default;
+      cursor: pointer;
+      animation: fadeUp 0.4s ease both;
     }
     .card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-5px);
       box-shadow: var(--shadow-hover);
     }
-    .card.hidden {
-      display: none;
-    }
+    .card.hidden { display: none; }
 
-    .card-accent {
-      height: 5px;
-    }
-    .card-body {
-      padding: 24px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
+    .card-accent { height: 5px; }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
     .card-school {
       font-family: 'Arial', sans-serif;
       font-size: 0.72rem;
@@ -224,13 +205,15 @@
       line-height: 1.65;
     }
     .card-footer {
-      padding: 14px 24px;
+      padding: 12px 24px;
       background: var(--gray-100);
       border-top: 1px solid var(--gray-200);
       display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 8px;
-      flex-wrap: wrap;
     }
+    .card-tags { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
     .tag {
       font-family: 'Arial', sans-serif;
       font-size: 0.7rem;
@@ -238,31 +221,244 @@
       padding: 3px 10px;
       border-radius: 999px;
       letter-spacing: 0.5px;
+      white-space: nowrap;
     }
+    .wins-badge {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .wins-badge .wins-num {
+      background: var(--duke-blue);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 0.7rem;
+    }
+    .wins-badge .wins-label { color: var(--gray-600); }
 
     /* Pillar color themes */
     .p-energy .card-accent { background: linear-gradient(90deg, #e67e22, #f39c12); }
-    .p-energy .card-school { color: #b5620c; }
+    .p-energy .card-school { color: var(--amber); }
     .p-energy .tag { background: var(--amber-light); color: var(--amber); }
+    .p-energy .wins-badge .wins-num { background: var(--amber); }
 
     .p-resilience .card-accent { background: linear-gradient(90deg, #27ae60, #2ecc71); }
     .p-resilience .card-school { color: var(--green); }
     .p-resilience .tag { background: var(--green-light); color: var(--green); }
+    .p-resilience .wins-badge .wins-num { background: var(--green); }
 
     .p-justice .card-accent { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
     .p-justice .card-school { color: var(--purple); }
     .p-justice .tag { background: #f3eafd; color: var(--purple); }
+    .p-justice .wins-badge .wins-num { background: var(--purple); }
 
     .p-data .card-accent { background: linear-gradient(90deg, var(--teal), #1abc9c); }
     .p-data .card-school { color: var(--teal); }
     .p-data .tag { background: #e6f7fa; color: var(--teal); }
+    .p-data .wins-badge .wins-num { background: var(--teal); }
 
-    /* Pillar dot colors */
+    .p-athletics .card-accent { background: linear-gradient(90deg, #012169, #1a4a9e); }
+    .p-athletics .card-school { color: var(--duke-blue); }
+    .p-athletics .tag { background: #e8ecf4; color: var(--duke-blue); }
+    .p-athletics .wins-badge .wins-num { background: var(--duke-blue); }
+
+    /* Dot colors */
     .dot-energy { background: #e67e22; }
     .dot-resilience { background: var(--green); }
     .dot-justice { background: var(--purple); }
     .dot-data { background: var(--teal); }
+    .dot-athletics { background: var(--duke-blue); }
     .dot-all { background: var(--duke-blue); }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(1, 20, 87, 0.55);
+      backdrop-filter: blur(3px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal {
+      background: var(--white);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 80px rgba(1,33,105,0.3);
+      transform: translateY(24px) scale(0.97);
+      transition: transform 0.25s;
+    }
+    .modal-overlay.open .modal {
+      transform: translateY(0) scale(1);
+    }
+    .modal-header {
+      height: 6px;
+      border-radius: 16px 16px 0 0;
+    }
+    .modal-body { padding: 28px 32px 32px; }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .modal-school {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      line-height: 1.3;
+      max-width: 400px;
+    }
+    .modal-close {
+      background: var(--gray-100);
+      border: none;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--gray-600);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 12px;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: var(--gray-200); color: var(--gray-800); }
+    .modal-desc {
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .wins-heading {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .wins-count-badge {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: var(--duke-blue);
+      color: var(--white);
+      border-radius: 999px;
+      padding: 2px 10px;
+    }
+    .wins-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .win-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--gray-100);
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .win-item:hover {
+      background: var(--gray-200);
+      transform: translateX(3px);
+    }
+    .win-num {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--duke-blue);
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .win-text { flex: 1; }
+    .win-title {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      line-height: 1.4;
+    }
+    .win-source {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      margin-top: 3px;
+    }
+    .win-arrow {
+      font-size: 14px;
+      color: var(--gray-600);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* Pillar accent colors in modal */
+    .modal.p-energy .modal-header { background: linear-gradient(90deg, #e67e22, #f39c12); }
+    .modal.p-energy .modal-school { color: var(--amber); }
+    .modal.p-energy .win-num { background: var(--amber); }
+    .modal.p-energy .wins-count-badge { background: var(--amber); }
+
+    .modal.p-resilience .modal-header { background: linear-gradient(90deg, #27ae60, #2ecc71); }
+    .modal.p-resilience .modal-school { color: var(--green); }
+    .modal.p-resilience .win-num { background: var(--green); }
+    .modal.p-resilience .wins-count-badge { background: var(--green); }
+
+    .modal.p-justice .modal-header { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
+    .modal.p-justice .modal-school { color: var(--purple); }
+    .modal.p-justice .win-num { background: var(--purple); }
+    .modal.p-justice .wins-count-badge { background: var(--purple); }
+
+    .modal.p-data .modal-header { background: linear-gradient(90deg, var(--teal), #1abc9c); }
+    .modal.p-data .modal-school { color: var(--teal); }
+    .modal.p-data .win-num { background: var(--teal); }
+    .modal.p-data .wins-count-badge { background: var(--teal); }
+
+    .modal.p-athletics .modal-header { background: linear-gradient(90deg, #012169, #1a4a9e); }
+    .modal.p-athletics .modal-school { color: var(--duke-blue); }
 
     /* ── Commitment Strip ── */
     .commitment-strip {
@@ -270,12 +466,8 @@
       color: var(--white);
       padding: 56px 24px;
       text-align: center;
-      margin-top: 0;
     }
-    .commitment-strip h2 {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
+    .commitment-strip h2 { font-size: 1.8rem; margin-bottom: 12px; }
     .commitment-strip p {
       max-width: 580px;
       margin: 0 auto;
@@ -315,7 +507,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .card { animation: fadeUp 0.4s ease both; }
     .card:nth-child(1) { animation-delay: 0.05s; }
     .card:nth-child(2) { animation-delay: 0.10s; }
     .card:nth-child(3) { animation-delay: 0.15s; }
@@ -325,11 +516,13 @@
     .card:nth-child(7) { animation-delay: 0.35s; }
     .card:nth-child(8) { animation-delay: 0.40s; }
     .card:nth-child(9) { animation-delay: 0.45s; }
+    .card:nth-child(10) { animation-delay: 0.50s; }
 
     @media (max-width: 600px) {
       .hero { padding: 56px 20px 44px; }
       .hero-stats { gap: 24px; }
       .cards-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 20px; }
     }
   </style>
 </head>
@@ -339,11 +532,11 @@
 <header class="hero">
   <div class="hero-badge">Duke University</div>
   <h1>Where <em>Climate Action</em><br>Meets Academic Excellence</h1>
-  <p>Discover how Duke's schools, institutes, and labs are advancing the Duke Climate Commitment — working toward a carbon-neutral, resilient world by 2030.</p>
+  <p>Discover how Duke's schools, institutes, and programs are advancing the Duke Climate Commitment — working toward a carbon-neutral, resilient world by 2030.</p>
   <div class="hero-stats">
     <div class="stat">
       <span class="stat-num">10+</span>
-      <span class="stat-label">Schools Engaged</span>
+      <span class="stat-label">Areas Engaged</span>
     </div>
     <div class="stat">
       <span class="stat-num">4</span>
@@ -378,6 +571,9 @@
     <button class="pillar-btn" data-filter="data">
       <span class="dot dot-data"></span> Data-Driven Solutions
     </button>
+    <button class="pillar-btn" data-filter="athletics">
+      <span class="dot dot-athletics"></span> Athletics
+    </button>
   </div>
 </nav>
 
@@ -385,143 +581,198 @@
 <main class="main">
   <div class="section-header">
     <h2 class="section-title">Campus Climate Leaders</h2>
-    <span class="section-count" id="card-count">Showing all 9 areas</span>
+    <span class="section-count" id="card-count">Showing all 10 areas</span>
   </div>
 
   <div class="cards-grid" id="cards-grid">
 
-    <!-- 1 Nicholas School -->
-    <article class="card p-resilience" data-pillar="resilience">
+    <article class="card p-resilience" data-pillar="resilience" data-id="nicholas">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Nicholas School of the Environment</div>
         <h3>Climate Research &amp; Environmental Leadership</h3>
-        <p>Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. The 2025 State of the Climate Commitment report spotlights Nicholas faculty driving breakthroughs from coastal resilience to carbon accounting.</p>
+        <p>Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. Nicholas faculty drive breakthroughs from coastal resilience to carbon accounting.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Flagship Partner</span>
-        <span class="tag">Policy &amp; Ecosystems</span>
-        <span class="tag">2025 Annual Report</span>
+        <div class="card-tags">
+          <span class="tag">Flagship Partner</span>
+          <span class="tag">Policy &amp; Ecosystems</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 2 Fuqua -->
-    <article class="card p-justice" data-pillar="justice">
+    <article class="card p-justice" data-pillar="justice" data-id="fuqua">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Fuqua School of Business</div>
         <h3>ClimateCAP &amp; MBA Sustainability Program</h3>
-        <p>The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint 10-month Master in Business, Climate, and Sustainability with the Nicholas School bridges management and environmental science.</p>
+        <p>The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint master's degree with the Nicholas School bridges management and environmental science.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Business Education</span>
-        <span class="tag">48 Partner Schools</span>
-        <span class="tag">Joint Degree</span>
+        <div class="card-tags">
+          <span class="tag">Business Education</span>
+          <span class="tag">48 Partner Schools</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 3 Pratt Engineering -->
-    <article class="card p-energy" data-pillar="energy">
+    <article class="card p-energy" data-pillar="energy" data-id="pratt">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Pratt School of Engineering</div>
         <h3>DESIGN Climate &amp; Clean-Energy Engineering</h3>
-        <p>DESIGN Climate — a $750K initiative co-sponsored with the Nicholas School — deploys interdisciplinary student-faculty teams on real client climate challenges. Pratt faculty also collaborate on high-resolution remote sensing platforms to monitor ecological change.</p>
+        <p>DESIGN Climate — a $750K initiative co-sponsored with the Nicholas School — deploys interdisciplinary student-faculty teams on real client climate challenges. Pratt also offers a new Master of Engineering in Climate &amp; Sustainability.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">$750K Initiative</span>
-        <span class="tag">Remote Sensing</span>
-        <span class="tag">Design Thinking</span>
+        <div class="card-tags">
+          <span class="tag">$750K Initiative</span>
+          <span class="tag">MEng Program</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 4 Chemistry -->
-    <article class="card p-energy" data-pillar="energy">
+    <article class="card p-energy" data-pillar="energy" data-id="chemistry">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Department of Chemistry</div>
         <h3>Next-Generation Renewable Energy Research</h3>
-        <p>Faculty including David Beratan, Jie Liu, Ivan Moreno-Hernandez, and Michael Therien are exploring novel materials and molecular systems for renewable energy conversion — from solar harvesting to advanced battery chemistries — under the Climate Commitment's energy pillar.</p>
+        <p>Faculty explore novel materials for renewable energy — from solar harvesting to green hydrogen via water electrolysis. Chemistry researchers are among 12 teams funded to advance Duke Climate Commitment priorities.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Solar Energy</span>
-        <span class="tag">Materials Science</span>
-        <span class="tag">Clean Tech</span>
+        <div class="card-tags">
+          <span class="tag">Green Hydrogen</span>
+          <span class="tag">Solar Energy</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">2</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 5 Marine Lab -->
-    <article class="card p-resilience" data-pillar="resilience">
+    <article class="card p-resilience" data-pillar="resilience" data-id="marine">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Duke Marine Lab</div>
         <h3>Oceans@Duke &amp; Coastal Resilience</h3>
-        <p>Oceans@Duke has catalyzed interdisciplinary ocean research and student engagement since 2020. The Marine Lab also leads <em>Ready, Set, Resilience</em> — a K-12 community science program partnering with NC public schools and resilience practitioners to build climate-ready communities.</p>
+        <p>Oceans@Duke catalyzes interdisciplinary ocean research and student engagement. The Marine Lab also leads <em>Ready, Set, Resilience</em> — a K–12 community science program partnering with NC schools and practitioners.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Ocean Science</span>
-        <span class="tag">K–12 Outreach</span>
-        <span class="tag">Community Science</span>
+        <div class="card-tags">
+          <span class="tag">Ocean Science</span>
+          <span class="tag">K–12 Outreach</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 6 Nicholas Institute -->
-    <article class="card p-data" data-pillar="data">
+    <article class="card p-data" data-pillar="data" data-id="nicholas-institute">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Nicholas Institute for Energy, Environment &amp; Sustainability</div>
         <h3>Climate TRACE &amp; Data-Driven Policy</h3>
-        <p>The Nicholas Institute coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities. It anchors Climate TRACE — a global initiative using satellite and AI-driven data to track greenhouse gas emissions at source level across every country.</p>
+        <p>Coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities and anchors Climate TRACE — a global AI and satellite initiative tracking greenhouse gas emissions at source level worldwide.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Climate TRACE</span>
-        <span class="tag">AI &amp; Satellites</span>
-        <span class="tag">Policy Bridge</span>
+        <div class="card-tags">
+          <span class="tag">Climate TRACE</span>
+          <span class="tag">AI &amp; Satellites</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 7 Sanford -->
-    <article class="card p-justice" data-pillar="justice">
+    <article class="card p-justice" data-pillar="justice" data-id="sanford">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Sanford School of Public Policy</div>
         <h3>Climate Policy, Health &amp; Environmental Justice</h3>
-        <p>Sanford is identified as a school with "distinct advantages" in climate policy and health justice. Faculty research spans energy transition governance, climate health disparities, and equitable distribution of mitigation burdens — directly informing local and national policy.</p>
+        <p>Ranked #2 in energy and environmental policy, Sanford shapes narratives and advises policymakers. Former EPA Administrator Michael Regan joins as Distinguished Fellow for 2025–2026.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">Public Policy</span>
-        <span class="tag">Health Equity</span>
-        <span class="tag">Governance</span>
+        <div class="card-tags">
+          <span class="tag">Public Policy</span>
+          <span class="tag">Health Equity</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 8 SCALES -->
-    <article class="card p-data" data-pillar="data">
+    <article class="card p-data" data-pillar="data" data-id="scales">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">University-Wide Initiative</div>
         <h3>SCALES — Scholars for Climate &amp; Advanced Leadership</h3>
-        <p>A $10.45 million investment recruits outstanding early-career scholars across Duke's 10+ schools to advance climate breakthroughs through collaborative research partnerships. SCALES builds the next generation of climate scientists, engineers, policymakers, and advocates.</p>
+        <p>A $10.45 million investment recruits early-career scholars across Duke's schools to advance climate breakthroughs. Up to 24 postdoctoral fellows will be supported across six cohorts from 2026 to 2033.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">$10.45M</span>
-        <span class="tag">Early-Career Scholars</span>
-        <span class="tag">Cross-School</span>
+        <div class="card-tags">
+          <span class="tag">$10.45M</span>
+          <span class="tag">Cross-School</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
-    <!-- 9 Sustainable Operations -->
-    <article class="card p-energy" data-pillar="energy">
+    <article class="card p-energy" data-pillar="energy" data-id="operations">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Office of Climate &amp; Sustainability</div>
         <h3>Sustainable Campus Operations</h3>
-        <p>Duke targets a 20% reduction in building energy use (pre-2009 stock) by 2030, alongside low-carbon construction standards for new facilities. The Office coordinates energy efficiency audits, renewable procurement, and the Climate &amp; Sustainability Fluency Framework for all students.</p>
+        <p>Duke achieved carbon neutrality in 2024 — the first large research university on the East Coast to do so. Three off-campus solar arrays will supply 50% of campus electricity by mid-2025, with a 2050 net-zero goal now being set.</p>
       </div>
       <div class="card-footer">
-        <span class="tag">20% Energy Reduction</span>
-        <span class="tag">Green Buildings</span>
-        <span class="tag">Campus Ops</span>
+        <div class="card-tags">
+          <span class="tag">Carbon Neutral 2024</span>
+          <span class="tag">50% Solar by 2025</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card p-athletics" data-pillar="athletics" data-id="athletics">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Duke Athletics</div>
+        <h3>Athletics Climate Team: Leaders On and Off the Field</h3>
+        <p>Duke Athletics launched a dedicated Climate Team to advance sustainability across sports programs, partnering with organizations like ReBounce to close the loop on equipment waste and mobilizing student-athletes as climate advocates.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag">Climate Team</span>
+          <span class="tag">ReBounce Partnership</span>
+        </div>
+        <div class="wins-badge">
+          <span class="wins-num">3</span>
+          <span class="wins-label">wins</span>
+        </div>
       </div>
     </article>
 
@@ -541,37 +792,210 @@
   <p>Content drawn from the <a href="https://climate.duke.edu/annual-report-2025/" target="_blank" rel="noopener">2025 State of the Duke Climate Commitment</a> and official Duke University sources. Not an official Duke publication.</p>
 </footer>
 
+<!-- ═══════════════════════════ MODAL ═══════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal" id="modal">
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body">
+      <div class="modal-top">
+        <div>
+          <div class="modal-school" id="modal-school"></div>
+          <div class="modal-title" id="modal-title"></div>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      </div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <div class="wins-heading">
+        Climate Wins Documented
+        <span class="wins-count-badge" id="modal-wins-count"></span>
+      </div>
+      <div class="wins-list" id="modal-wins-list"></div>
+    </div>
+  </div>
+</div>
+
 <script>
+  /* ── Card data ── */
+  const DATA = {
+    nicholas: {
+      pillar: 'p-resilience',
+      school: 'Nicholas School of the Environment',
+      title: 'Climate Research & Environmental Leadership',
+      desc: "Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. The 2025 State of the Climate Commitment report spotlights Nicholas faculty driving breakthroughs from coastal resilience to carbon accounting. Nicholas students, researchers, and initiatives figure prominently across all five focus areas of the annual report: education, research, sustainable operations, external engagement, and community partnerships.",
+      wins: [
+        { title: '2025 Climate Commitment Report Spotlights Nicholas School', source: 'nicholas.duke.edu', url: 'https://nicholas.duke.edu/news/2025-duke-state-climate-commitment-report-highlights-nicholas-school-work' },
+        { title: 'Climate Leaders in Residence Program Launches at Duke', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/climate-leaders-residence-clir' },
+        { title: 'Duke Climate Commitment Launched with $36M in Inaugural Gifts', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/duke-university-announces-duke-climate-commitment-inaugural-gifts' }
+      ]
+    },
+    fuqua: {
+      pillar: 'p-justice',
+      school: 'Fuqua School of Business',
+      title: 'ClimateCAP & MBA Sustainability Program',
+      desc: "The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint 10-month Master in Business, Climate, and Sustainability with the Nicholas School bridges management and environmental science. The 2025 Fellows class was the largest and most diverse yet, with a 50%+ jump in applications drawn from MIT, Harvard, UCLA, HEC Paris, and other top programs.",
+      wins: [
+        { title: 'ClimateCAP Reaches 3,000+ MBA Students Globally', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/climatecap-initiative-for-mba-students/' },
+        { title: 'ClimateCAP Announces Largest-Ever Fellows Class for 2025', source: 'centers.fuqua.duke.edu', url: 'https://centers.fuqua.duke.edu/edge/2025/01/17/climatecap-announces-new-fellows-preps-for-summit/' },
+        { title: "Fuqua's EDGE Center: Climate & Energy Leadership Hub", source: 'centers.fuqua.duke.edu', url: 'https://centers.fuqua.duke.edu/edge/tag/climatecap/index.html' }
+      ]
+    },
+    pratt: {
+      pillar: 'p-energy',
+      school: 'Pratt School of Engineering',
+      title: 'DESIGN Climate & Clean-Energy Engineering',
+      desc: "DESIGN Climate is a $750K interdisciplinary program co-sponsored with the Nicholas School that deploys student-faculty teams to tackle real client climate challenges. The new 18-month Master of Engineering in Climate & Sustainability Engineering is structured around four pillars: energy transition, sustainable infrastructure, sustainable materials, and climate finance. Pratt's Climate Pathfinder initiative also profiles engineers driving solutions for climate resiliency.",
+      wins: [
+        { title: 'DESIGN Climate Program Drives Sustainable Innovations', source: 'pratt.duke.edu', url: 'https://pratt.duke.edu/news/sustainable-innovations-design-climate/' },
+        { title: 'New Master of Engineering in Climate & Sustainability Announced', source: 'pratt.duke.edu', url: 'https://pratt.duke.edu/news/new-master-engineering-program-will-create-climate-innovation-culture/' },
+        { title: 'Climate Pathfinder: Engineering Solutions for Climate Resiliency', source: 'today.duke.edu', url: 'https://today.duke.edu/2025/10/climate-pathfinder-how-engineering-can-offer-solutions-climate-resiliency' }
+      ]
+    },
+    chemistry: {
+      pillar: 'p-energy',
+      school: 'Department of Chemistry',
+      title: 'Next-Generation Renewable Energy Research',
+      desc: "Duke Chemistry faculty including David Beratan, Jie Liu, Ivan Moreno-Hernandez, and Michael Therien are exploring novel materials and molecular systems for renewable energy — from light harvesting to advanced battery chemistries. Benjamin Wiley leads research on green hydrogen produced by breaking down water with electricity from renewable sources, aiming to dramatically lower its cost through more efficient electrolyzers.",
+      wins: [
+        { title: '12 Research Teams Launch Climate Commitment Projects (Incl. Chemistry)', source: 'today.duke.edu', url: 'https://today.duke.edu/2023/05/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities' },
+        { title: 'Climate Commitment Annual Report Highlights Research Progress', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/12/climate-commitment-annual-report-highlights-duke-progress-climate-research-and' }
+      ]
+    },
+    marine: {
+      pillar: 'p-resilience',
+      school: 'Duke Marine Lab',
+      title: 'Oceans@Duke & Coastal Resilience',
+      desc: "Oceans@Duke has catalyzed interdisciplinary ocean research and student engagement since 2020. The Marine Lab's 2025 Oceans Week brought together students, faculty, and professionals to explore AI in marine science, plastic pollution, and ocean-related careers. The Community Science Initiative's Ready, Set, Resilience program partners with NC public schools and resilience practitioners to build climate-ready communities.",
+      wins: [
+        { title: "Duke's Marine Lab at the Frontlines of Climate Change and Ocean Sciences", source: 'today.duke.edu', url: 'https://today.duke.edu/2024/09/dukes-marine-lab-frontlines-climate-change-and-ocean-sciences' },
+        { title: 'Oceans Week 2025: Ocean Conservation, AI, and Marine Science', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/oceans-week-2025/' },
+        { title: 'Marine Lab Connects with Coastal Neighbors', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/07/marine-lab-connects-coastal-neighbors' }
+      ]
+    },
+    'nicholas-institute': {
+      pillar: 'p-data',
+      school: 'Nicholas Institute for Energy, Environment & Sustainability',
+      title: 'Climate TRACE & Data-Driven Policy',
+      desc: "The Nicholas Institute coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities and anchors Climate TRACE — a global initiative using satellite imagery and machine learning to track greenhouse gas emissions at source level across every country. The Institute also runs the U.N. Climate Change Negotiations Practicum, placing Duke students inside international climate diplomacy.",
+      wins: [
+        { title: '12 Research Teams Advancing Climate Commitment Priorities', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities' },
+        { title: 'Climate TRACE: AI-Powered Global Emissions Tracking', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/climate-trace/' },
+        { title: 'National Climate Resilience Framework: Key Partner Perspectives', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/national-climate-resilience-framework-perspectives-key-partners' }
+      ]
+    },
+    sanford: {
+      pillar: 'p-justice',
+      school: 'Sanford School of Public Policy',
+      title: 'Climate Policy, Health & Environmental Justice',
+      desc: "Ranked #2 in energy and environmental policy, Sanford provides top-tier insights advising local, national, and international policymakers. Former EPA Administrator Michael Regan joins as a Polis Distinguished Fellow for 2025–2026, deepening Sanford's climate justice leadership. Faculty research spans energy transition governance, climate health disparities, and the equitable distribution of mitigation and adaptation burdens.",
+      wins: [
+        { title: 'Sanford Continues to Lead in Energy & Environment Policy', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/story/sanford-continues-lead-energy-environment-policy/' },
+        { title: 'Defining Climate Justice at Duke', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/story/defining-climate-justice/' },
+        { title: 'Climate Mobility and Climate Justice: Research & Policy Advocacy', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/event/climate-mobility-and-climate-justice-state-research-and-policy-advocacy/' }
+      ]
+    },
+    scales: {
+      pillar: 'p-data',
+      school: 'University-Wide Initiative',
+      title: 'SCALES — Scholars for Climate & Advanced Leadership',
+      desc: "The $10.45M SCALES Postdoctoral Fellows Program recruits early-career scholars from across Duke's 10+ schools to advance climate breakthroughs through collaborative research. Up to 24 fellows across six cohorts will be supported from 2026 to 2033. Fellows co-create high-impact research projects with faculty mentors and engage in educational efforts through Climate+, Bass Connections, and DukeEngage.",
+      wins: [
+        { title: 'SCALES Postdoctoral Fellows Program: Call for Faculty Proposals', source: 'sustainability.duke.edu', url: 'https://sustainability.duke.edu/scales-postdoctoral-fellows-program-call-faculty-proposals/' },
+        { title: 'SCALe: Sustainability and Climate Applied Learning Program', source: 'sustainability.duke.edu', url: 'https://sustainability.duke.edu/scale/' },
+        { title: 'SCALe Program Featured in Climate Commitment Annual Report', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/sustainability-and-climate-applied-learning-scale-program/' }
+      ]
+    },
+    operations: {
+      pillar: 'p-energy',
+      school: 'Office of Climate & Sustainability',
+      title: 'Sustainable Campus Operations',
+      desc: "Duke achieved carbon neutrality in FY2024 — the first large research university on the East Coast to reach this milestone. Three new off-campus solar arrays (101 MW via Pine Gate Renewables) will supply 50% of campus electricity by mid-2025. The Operations subcommittee is now developing a 2050 net-zero target that for the first time encompasses the Duke University Health System.",
+      wins: [
+        { title: 'Duke Reaches Important Milestone in Carbon Neutrality', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/10/duke-reaches-important-milestone-carbon-neutrality' },
+        { title: 'Duke Declares Victory in University Climate Pledge', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/10/duke-declares-victory-university-climate-pledge' },
+        { title: 'Carbon Neutrality Achieved; 2050 Net-Zero Goal Set', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/carbon-neutrality-goal-achieved-2050-goal-set/' }
+      ]
+    },
+    athletics: {
+      pillar: 'p-athletics',
+      school: 'Duke Athletics',
+      title: 'Athletics Climate Team: Leaders On and Off the Field',
+      desc: "Duke Athletics launched a dedicated Climate Team to advance sustainability across its sports programs, building on years of student-athlete-led initiatives. The program mobilizes Duke's competitive culture toward measurable environmental impact — from equipment sustainability partnerships to integrating climate action into athletic identity.",
+      wins: [
+        { title: 'Duke Athletics Announces Partnership with ReBounce', source: 'goduke.com', url: 'https://goduke.com/news/2026/2/12/mens-tennis-duke-athletics-announces-partnership-with-rebounce' },
+        { title: "Women's Soccer All-America Dorsey Rejoins Duke Athletics", source: 'goduke.com', url: 'https://goduke.com/news/2025/11/12/womens-soccer-all-america-dorsey-rejoins-duke-athletics' },
+        { title: 'Duke Athletics Climate Team: Leaders on and off the Field', source: 'today.duke.edu', url: 'https://today.duke.edu/2025/04/duke-athletics-climate-team-leaders-and-field' }
+      ]
+    }
+  };
+
+  /* ── Filter logic ── */
   const buttons = document.querySelectorAll('.pillar-btn');
   const cards   = document.querySelectorAll('.card');
   const counter = document.getElementById('card-count');
 
-  function updateCount(visible) {
-    counter.textContent = `Showing ${visible} area${visible !== 1 ? 's' : ''}`;
+  function updateCount(n) {
+    counter.textContent = `Showing ${n} area${n !== 1 ? 's' : ''}`;
   }
 
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       const filter = btn.dataset.filter;
-
-      // Update active button
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      // Filter cards
       let count = 0;
       cards.forEach(card => {
         const match = filter === 'all' || card.dataset.pillar === filter;
         card.classList.toggle('hidden', !match);
         if (match) count++;
       });
-
       updateCount(count);
     });
   });
-
-  // Init count
   updateCount(cards.length);
+
+  /* ── Modal logic ── */
+  const overlay   = document.getElementById('modal-overlay');
+  const modal     = document.getElementById('modal');
+  const closeBtn  = document.getElementById('modal-close');
+
+  function openModal(id) {
+    const d = DATA[id];
+    if (!d) return;
+
+    modal.className = 'modal ' + d.pillar;
+    document.getElementById('modal-school').textContent = d.school;
+    document.getElementById('modal-title').textContent  = d.title;
+    document.getElementById('modal-desc').textContent   = d.desc;
+    document.getElementById('modal-wins-count').textContent = d.wins.length;
+
+    const list = document.getElementById('modal-wins-list');
+    list.innerHTML = d.wins.map((w, i) => `
+      <a class="win-item" href="${w.url}" target="_blank" rel="noopener">
+        <span class="win-num">${i + 1}</span>
+        <span class="win-text">
+          <span class="win-title">${w.title}</span>
+          <span class="win-source">${w.source}</span>
+        </span>
+        <span class="win-arrow">↗</span>
+      </a>
+    `).join('');
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => openModal(card.dataset.id));
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 
 </body>
