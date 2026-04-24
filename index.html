@@ -84,12 +84,7 @@
       flex-wrap: wrap;
     }
     .stat { text-align: center; }
-    .stat-num {
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: #7eb8f7;
-      display: block;
-    }
+    .stat-num { font-size: 2.2rem; font-weight: 700; color: #7eb8f7; display: block; }
     .stat-label {
       font-family: 'Arial', sans-serif;
       font-size: 0.78rem;
@@ -111,7 +106,6 @@
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
-      gap: 0;
       overflow-x: auto;
       scrollbar-width: none;
     }
@@ -134,18 +128,10 @@
     }
     .pillar-btn:hover { color: var(--duke-blue); }
     .pillar-btn.active { color: var(--duke-blue); border-bottom-color: var(--duke-blue); }
-    .pillar-btn .dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .pillar-btn .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Main Content ── */
-    .main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 24px 80px;
-    }
+    /* ── Main ── */
+    .main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
     .section-header {
       display: flex;
       align-items: baseline;
@@ -157,13 +143,12 @@
     .section-title { font-size: 1.4rem; font-weight: 700; color: var(--duke-blue); }
     .section-count { font-family: 'Arial', sans-serif; font-size: 0.82rem; color: var(--gray-600); }
 
-    /* ── Cards Grid ── */
+    /* ── Cards ── */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
       gap: 24px;
     }
-
     .card {
       background: var(--white);
       border-radius: var(--radius);
@@ -175,12 +160,8 @@
       cursor: pointer;
       animation: fadeUp 0.4s ease both;
     }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
+    .card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
     .card.hidden { display: none; }
-
     .card-accent { height: 5px; }
     .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
     .card-school {
@@ -191,19 +172,8 @@
       text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .card h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--gray-800);
-      margin-bottom: 10px;
-      line-height: 1.35;
-    }
-    .card p {
-      font-size: 0.9rem;
-      color: var(--gray-600);
-      flex: 1;
-      line-height: 1.65;
-    }
+    .card h3 { font-size: 1.05rem; font-weight: 700; color: var(--gray-800); margin-bottom: 10px; line-height: 1.35; }
+    .card p { font-size: 0.9rem; color: var(--gray-600); flex: 1; line-height: 1.65; }
     .card-footer {
       padding: 12px 24px;
       background: var(--gray-100);
@@ -237,36 +207,58 @@
       background: var(--duke-blue);
       color: var(--white);
       border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 0.7rem;
+      padding: 2px 9px;
+      font-size: 0.72rem;
     }
     .wins-badge .wins-label { color: var(--gray-600); }
+
+    /* ── Bar indicator ── */
+    .wins-bar-wrap {
+      padding: 0 24px 14px;
+      background: var(--gray-100);
+    }
+    .wins-bar-track {
+      height: 4px;
+      background: var(--gray-200);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .wins-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.6s ease;
+    }
 
     /* Pillar color themes */
     .p-energy .card-accent { background: linear-gradient(90deg, #e67e22, #f39c12); }
     .p-energy .card-school { color: var(--amber); }
     .p-energy .tag { background: var(--amber-light); color: var(--amber); }
     .p-energy .wins-badge .wins-num { background: var(--amber); }
+    .p-energy .wins-bar-fill { background: var(--amber); }
 
     .p-resilience .card-accent { background: linear-gradient(90deg, #27ae60, #2ecc71); }
     .p-resilience .card-school { color: var(--green); }
     .p-resilience .tag { background: var(--green-light); color: var(--green); }
     .p-resilience .wins-badge .wins-num { background: var(--green); }
+    .p-resilience .wins-bar-fill { background: var(--green); }
 
     .p-justice .card-accent { background: linear-gradient(90deg, #8e44ad, #9b59b6); }
     .p-justice .card-school { color: var(--purple); }
     .p-justice .tag { background: #f3eafd; color: var(--purple); }
     .p-justice .wins-badge .wins-num { background: var(--purple); }
+    .p-justice .wins-bar-fill { background: var(--purple); }
 
     .p-data .card-accent { background: linear-gradient(90deg, var(--teal), #1abc9c); }
     .p-data .card-school { color: var(--teal); }
     .p-data .tag { background: #e6f7fa; color: var(--teal); }
     .p-data .wins-badge .wins-num { background: var(--teal); }
+    .p-data .wins-bar-fill { background: var(--teal); }
 
     .p-athletics .card-accent { background: linear-gradient(90deg, #012169, #1a4a9e); }
     .p-athletics .card-school { color: var(--duke-blue); }
     .p-athletics .tag { background: #e8ecf4; color: var(--duke-blue); }
     .p-athletics .wins-badge .wins-num { background: var(--duke-blue); }
+    .p-athletics .wins-bar-fill { background: var(--duke-blue); }
 
     /* Dot colors */
     .dot-energy { background: #e67e22; }
@@ -280,7 +272,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(1, 20, 87, 0.55);
+      background: rgba(1,20,87,0.55);
       backdrop-filter: blur(3px);
       z-index: 100;
       display: flex;
@@ -291,28 +283,20 @@
       pointer-events: none;
       transition: opacity 0.25s;
     }
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
     .modal {
       background: var(--white);
       border-radius: 16px;
       width: 100%;
-      max-width: 560px;
-      max-height: 90vh;
+      max-width: 580px;
+      max-height: 88vh;
       overflow-y: auto;
       box-shadow: 0 24px 80px rgba(1,33,105,0.3);
       transform: translateY(24px) scale(0.97);
       transition: transform 0.25s;
     }
-    .modal-overlay.open .modal {
-      transform: translateY(0) scale(1);
-    }
-    .modal-header {
-      height: 6px;
-      border-radius: 16px 16px 0 0;
-    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
+    .modal-header { height: 6px; border-radius: 16px 16px 0 0; position: sticky; top: 0; z-index: 2; }
     .modal-body { padding: 28px 32px 32px; }
     .modal-top {
       display: flex;
@@ -328,19 +312,12 @@
       text-transform: uppercase;
       margin-bottom: 6px;
     }
-    .modal-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--gray-800);
-      line-height: 1.3;
-      max-width: 400px;
-    }
+    .modal-title { font-size: 1.25rem; font-weight: 700; color: var(--gray-800); line-height: 1.3; max-width: 420px; }
     .modal-close {
       background: var(--gray-100);
       border: none;
       border-radius: 50%;
-      width: 34px;
-      height: 34px;
+      width: 34px; height: 34px;
       cursor: pointer;
       font-size: 18px;
       color: var(--gray-600);
@@ -356,9 +333,15 @@
       font-size: 0.95rem;
       color: var(--gray-600);
       line-height: 1.7;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       padding-bottom: 24px;
       border-bottom: 1px solid var(--gray-200);
+    }
+    .modal-wins-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
     }
     .wins-heading {
       font-family: 'Arial', sans-serif;
@@ -367,49 +350,45 @@
       letter-spacing: 1.5px;
       text-transform: uppercase;
       color: var(--gray-600);
-      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 10px;
     }
     .wins-count-badge {
       font-family: 'Arial', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
       background: var(--duke-blue);
       color: var(--white);
       border-radius: 999px;
       padding: 2px 10px;
     }
-    .wins-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .wins-total-note {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.72rem;
+      color: var(--gray-600);
     }
+    .wins-list { display: flex; flex-direction: column; gap: 8px; }
     .win-item {
       display: flex;
       align-items: flex-start;
       gap: 12px;
       background: var(--gray-100);
       border-radius: 10px;
-      padding: 14px 16px;
+      padding: 13px 15px;
       text-decoration: none;
       color: inherit;
       transition: background 0.15s, transform 0.15s;
     }
-    .win-item:hover {
-      background: var(--gray-200);
-      transform: translateX(3px);
-    }
+    .win-item:hover { background: var(--gray-200); transform: translateX(3px); }
     .win-num {
       font-family: 'Arial', sans-serif;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--white);
       background: var(--duke-blue);
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -417,26 +396,11 @@
       margin-top: 1px;
     }
     .win-text { flex: 1; }
-    .win-title {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--gray-800);
-      line-height: 1.4;
-    }
-    .win-source {
-      font-family: 'Arial', sans-serif;
-      font-size: 0.72rem;
-      color: var(--gray-600);
-      margin-top: 3px;
-    }
-    .win-arrow {
-      font-size: 14px;
-      color: var(--gray-600);
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
+    .win-title { font-size: 0.87rem; font-weight: 600; color: var(--gray-800); line-height: 1.4; }
+    .win-source { font-family: 'Arial', sans-serif; font-size: 0.7rem; color: var(--gray-600); margin-top: 3px; }
+    .win-arrow { font-size: 13px; color: var(--gray-600); flex-shrink: 0; margin-top: 3px; }
 
-    /* Pillar accent colors in modal */
+    /* Modal pillar colors */
     .modal.p-energy .modal-header { background: linear-gradient(90deg, #e67e22, #f39c12); }
     .modal.p-energy .modal-school { color: var(--amber); }
     .modal.p-energy .win-num { background: var(--amber); }
@@ -460,7 +424,7 @@
     .modal.p-athletics .modal-header { background: linear-gradient(90deg, #012169, #1a4a9e); }
     .modal.p-athletics .modal-school { color: var(--duke-blue); }
 
-    /* ── Commitment Strip ── */
+    /* ── CTA ── */
     .commitment-strip {
       background: linear-gradient(135deg, var(--duke-blue) 0%, var(--duke-navy) 100%);
       color: var(--white);
@@ -468,12 +432,7 @@
       text-align: center;
     }
     .commitment-strip h2 { font-size: 1.8rem; margin-bottom: 12px; }
-    .commitment-strip p {
-      max-width: 580px;
-      margin: 0 auto;
-      opacity: 0.85;
-      font-size: 0.98rem;
-    }
+    .commitment-strip p { max-width: 580px; margin: 0 auto; opacity: 0.85; font-size: 0.98rem; }
     .commitment-link {
       display: inline-block;
       margin-top: 24px;
@@ -491,7 +450,6 @@
     }
     .commitment-link:hover { background: rgba(255,255,255,0.25); }
 
-    /* ── Footer ── */
     footer {
       background: var(--gray-800);
       color: rgba(255,255,255,0.55);
@@ -502,7 +460,6 @@
     }
     footer a { color: rgba(255,255,255,0.75); }
 
-    /* ── Animations ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -528,19 +485,18 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <header class="hero">
   <div class="hero-badge">Duke University</div>
   <h1>Where <em>Climate Action</em><br>Meets Academic Excellence</h1>
   <p>Discover how Duke's schools, institutes, and programs are advancing the Duke Climate Commitment — working toward a carbon-neutral, resilient world by 2030.</p>
   <div class="hero-stats">
     <div class="stat">
-      <span class="stat-num">10+</span>
+      <span class="stat-num">10</span>
       <span class="stat-label">Areas Engaged</span>
     </div>
     <div class="stat">
-      <span class="stat-num">4</span>
-      <span class="stat-label">Strategic Pillars</span>
+      <span class="stat-num">193</span>
+      <span class="stat-label">Documented Wins</span>
     </div>
     <div class="stat">
       <span class="stat-num">2030</span>
@@ -553,31 +509,17 @@
   </div>
 </header>
 
-<!-- ═══════════════════════════ PILLAR FILTER ═══════════════════════════ -->
 <nav class="pillars">
   <div class="pillars-inner">
-    <button class="pillar-btn active" data-filter="all">
-      <span class="dot dot-all"></span> All Areas
-    </button>
-    <button class="pillar-btn" data-filter="energy">
-      <span class="dot dot-energy"></span> Transforming Energy
-    </button>
-    <button class="pillar-btn" data-filter="resilience">
-      <span class="dot dot-resilience"></span> Climate-Resilient Communities
-    </button>
-    <button class="pillar-btn" data-filter="justice">
-      <span class="dot dot-justice"></span> Environmental Justice
-    </button>
-    <button class="pillar-btn" data-filter="data">
-      <span class="dot dot-data"></span> Data-Driven Solutions
-    </button>
-    <button class="pillar-btn" data-filter="athletics">
-      <span class="dot dot-athletics"></span> Athletics
-    </button>
+    <button class="pillar-btn active" data-filter="all"><span class="dot dot-all"></span> All Areas</button>
+    <button class="pillar-btn" data-filter="energy"><span class="dot dot-energy"></span> Transforming Energy</button>
+    <button class="pillar-btn" data-filter="resilience"><span class="dot dot-resilience"></span> Climate-Resilient Communities</button>
+    <button class="pillar-btn" data-filter="justice"><span class="dot dot-justice"></span> Environmental Justice</button>
+    <button class="pillar-btn" data-filter="data"><span class="dot dot-data"></span> Data-Driven Solutions</button>
+    <button class="pillar-btn" data-filter="athletics"><span class="dot dot-athletics"></span> Athletics</button>
   </div>
 </nav>
 
-<!-- ═══════════════════════════ CARDS ═══════════════════════════ -->
 <main class="main">
   <div class="section-header">
     <h2 class="section-title">Campus Climate Leaders</h2>
@@ -586,213 +528,159 @@
 
   <div class="cards-grid" id="cards-grid">
 
-    <article class="card p-resilience" data-pillar="resilience" data-id="nicholas">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Nicholas School of the Environment</div>
-        <h3>Climate Research &amp; Environmental Leadership</h3>
-        <p>Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. Nicholas faculty drive breakthroughs from coastal resilience to carbon accounting.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Flagship Partner</span>
-          <span class="tag">Policy &amp; Ecosystems</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-justice" data-pillar="justice" data-id="fuqua">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Fuqua School of Business</div>
-        <h3>ClimateCAP &amp; MBA Sustainability Program</h3>
-        <p>The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint master's degree with the Nicholas School bridges management and environmental science.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Business Education</span>
-          <span class="tag">48 Partner Schools</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-energy" data-pillar="energy" data-id="pratt">
+    <article class="card p-energy" data-pillar="energy" data-id="pratt" data-wins="25">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Pratt School of Engineering</div>
         <h3>DESIGN Climate &amp; Clean-Energy Engineering</h3>
-        <p>DESIGN Climate — a $750K initiative co-sponsored with the Nicholas School — deploys interdisciplinary student-faculty teams on real client climate challenges. Pratt also offers a new Master of Engineering in Climate &amp; Sustainability.</p>
+        <p>Home to DESIGN Climate, a Master of Engineering in Climate &amp; Sustainability, carbon-capture materials research, and the Gendell Center for Energy and the Environment — Pratt leads Duke's engineering response to the climate crisis.</p>
       </div>
       <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">$750K Initiative</span>
-          <span class="tag">MEng Program</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
+        <div class="card-tags"><span class="tag">DESIGN Climate</span><span class="tag">MEng C&amp;S</span><span class="tag">Carbon Capture</span></div>
+        <div class="wins-badge"><span class="wins-num">25</span><span class="wins-label">wins</span></div>
       </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:100%"></div></div></div>
     </article>
 
-    <article class="card p-energy" data-pillar="energy" data-id="chemistry">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Department of Chemistry</div>
-        <h3>Next-Generation Renewable Energy Research</h3>
-        <p>Faculty explore novel materials for renewable energy — from solar harvesting to green hydrogen via water electrolysis. Chemistry researchers are among 12 teams funded to advance Duke Climate Commitment priorities.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Green Hydrogen</span>
-          <span class="tag">Solar Energy</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">2</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-resilience" data-pillar="resilience" data-id="marine">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Duke Marine Lab</div>
-        <h3>Oceans@Duke &amp; Coastal Resilience</h3>
-        <p>Oceans@Duke catalyzes interdisciplinary ocean research and student engagement. The Marine Lab also leads <em>Ready, Set, Resilience</em> — a K–12 community science program partnering with NC schools and practitioners.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Ocean Science</span>
-          <span class="tag">K–12 Outreach</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-data" data-pillar="data" data-id="nicholas-institute">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Nicholas Institute for Energy, Environment &amp; Sustainability</div>
-        <h3>Climate TRACE &amp; Data-Driven Policy</h3>
-        <p>Coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities and anchors Climate TRACE — a global AI and satellite initiative tracking greenhouse gas emissions at source level worldwide.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Climate TRACE</span>
-          <span class="tag">AI &amp; Satellites</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-justice" data-pillar="justice" data-id="sanford">
+    <article class="card p-justice" data-pillar="justice" data-id="sanford" data-wins="25">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Sanford School of Public Policy</div>
         <h3>Climate Policy, Health &amp; Environmental Justice</h3>
-        <p>Ranked #2 in energy and environmental policy, Sanford shapes narratives and advises policymakers. Former EPA Administrator Michael Regan joins as Distinguished Fellow for 2025–2026.</p>
+        <p>Ranked #2 in energy and environmental policy, Sanford advances climate governance, environmental justice, and clean energy transition — from congressional testimony to community-based food systems policy.</p>
       </div>
       <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Public Policy</span>
-          <span class="tag">Health Equity</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
+        <div class="card-tags"><span class="tag">Policy #2 Ranked</span><span class="tag">Climate Justice</span><span class="tag">Energy Policy</span></div>
+        <div class="wins-badge"><span class="wins-num">25</span><span class="wins-label">wins</span></div>
       </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:100%"></div></div></div>
     </article>
 
-    <article class="card p-data" data-pillar="data" data-id="scales">
+    <article class="card p-data" data-pillar="data" data-id="scales" data-wins="22">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">University-Wide Initiative</div>
-        <h3>SCALES — Scholars for Climate &amp; Advanced Leadership</h3>
-        <p>A $10.45 million investment recruits early-career scholars across Duke's schools to advance climate breakthroughs. Up to 24 postdoctoral fellows will be supported across six cohorts from 2026 to 2033.</p>
+        <h3>SCALES, SCALe &amp; Climate Scholar Programs</h3>
+        <p>From the $10.45M SCALES postdoctoral program to the SCALe applied learning lab, Climate Scholars, Climate+, Bass Connections, and Teaching Fellows — Duke's cross-university programs embed climate action in every corner of campus.</p>
       </div>
       <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">$10.45M</span>
-          <span class="tag">Cross-School</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
+        <div class="card-tags"><span class="tag">$10.45M SCALES</span><span class="tag">SCALe</span><span class="tag">Bass Connections</span></div>
+        <div class="wins-badge"><span class="wins-num">22</span><span class="wins-label">wins</span></div>
       </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:88%"></div></div></div>
     </article>
 
-    <article class="card p-energy" data-pillar="energy" data-id="operations">
-      <div class="card-accent"></div>
-      <div class="card-body">
-        <div class="card-school">Office of Climate &amp; Sustainability</div>
-        <h3>Sustainable Campus Operations</h3>
-        <p>Duke achieved carbon neutrality in 2024 — the first large research university on the East Coast to do so. Three off-campus solar arrays will supply 50% of campus electricity by mid-2025, with a 2050 net-zero goal now being set.</p>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Carbon Neutral 2024</span>
-          <span class="tag">50% Solar by 2025</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="card p-athletics" data-pillar="athletics" data-id="athletics">
+    <article class="card p-athletics" data-pillar="athletics" data-id="athletics" data-wins="22">
       <div class="card-accent"></div>
       <div class="card-body">
         <div class="card-school">Duke Athletics</div>
         <h3>Athletics Climate Team: Leaders On and Off the Field</h3>
-        <p>Duke Athletics launched a dedicated Climate Team to advance sustainability across sports programs, partnering with organizations like ReBounce to close the loop on equipment waste and mobilizing student-athletes as climate advocates.</p>
+        <p>A 40-member Athletics Climate Team, Climate Commitment Games, the ReBounce partnership, a dedicated Climate &amp; Sustainability Coordinator, and the inaugural Collegiate Sports Sustainability Network — Duke Athletics is a national leader in green sports.</p>
       </div>
       <div class="card-footer">
-        <div class="card-tags">
-          <span class="tag">Climate Team</span>
-          <span class="tag">ReBounce Partnership</span>
-        </div>
-        <div class="wins-badge">
-          <span class="wins-num">3</span>
-          <span class="wins-label">wins</span>
-        </div>
+        <div class="card-tags"><span class="tag">Climate Team</span><span class="tag">CSSN Founder</span><span class="tag">ReBounce</span></div>
+        <div class="wins-badge"><span class="wins-num">22</span><span class="wins-label">wins</span></div>
       </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:88%"></div></div></div>
+    </article>
+
+    <article class="card p-resilience" data-pillar="resilience" data-id="nicholas" data-wins="20">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Nicholas School of the Environment</div>
+        <h3>Climate Research &amp; Environmental Leadership</h3>
+        <p>Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. The 2025 Climate Commitment report spotlights Nicholas faculty driving breakthroughs from coastal resilience to carbon accounting.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">Flagship Partner</span><span class="tag">Policy &amp; Ecosystems</span><span class="tag">Env. Justice</span></div>
+        <div class="wins-badge"><span class="wins-num">20</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:80%"></div></div></div>
+    </article>
+
+    <article class="card p-data" data-pillar="data" data-id="nicholas-institute" data-wins="20">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Nicholas Institute for Energy, Environment &amp; Sustainability</div>
+        <h3>Climate TRACE, Heat Policy &amp; Data-Driven Solutions</h3>
+        <p>Anchors Climate TRACE (AI-powered global emissions tracking), launched the first U.S. Heat Policy Innovation Hub, coordinates 12 interdisciplinary climate research teams, and runs the U.N. Climate Negotiations Practicum.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">Climate TRACE</span><span class="tag">Heat Policy Hub</span><span class="tag">AI &amp; Satellites</span></div>
+        <div class="wins-badge"><span class="wins-num">20</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:80%"></div></div></div>
+    </article>
+
+    <article class="card p-energy" data-pillar="energy" data-id="operations" data-wins="17">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Office of Climate &amp; Sustainability</div>
+        <h3>Sustainable Campus Operations</h3>
+        <p>Duke achieved carbon neutrality in 2024 — the first large research university on the East Coast to do so. A 101 MW solar deal with Pine Gate Renewables will supply 50% of campus electricity by mid-2025, with a 2050 net-zero target in development.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">Carbon Neutral 2024</span><span class="tag">101 MW Solar</span><span class="tag">LEED Buildings</span></div>
+        <div class="wins-badge"><span class="wins-num">17</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:68%"></div></div></div>
+    </article>
+
+    <article class="card p-resilience" data-pillar="resilience" data-id="marine" data-wins="16">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Duke Marine Lab</div>
+        <h3>Oceans@Duke &amp; Coastal Resilience</h3>
+        <p>Oceans@Duke, the annual Oceans Week, the Ready Set Resilience K–12 program, and the Marine Geospatial Ecology Lab place the Marine Lab at the frontline of climate science and coastal community resilience.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">Ocean Science</span><span class="tag">Coastal Resilience</span><span class="tag">K–12 Outreach</span></div>
+        <div class="wins-badge"><span class="wins-num">16</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:64%"></div></div></div>
+    </article>
+
+    <article class="card p-justice" data-pillar="justice" data-id="fuqua" data-wins="15">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Fuqua School of Business</div>
+        <h3>ClimateCAP &amp; MBA Sustainability Program</h3>
+        <p>ClimateCAP (48 partner schools, 3,000+ students), a new joint Master in Business, Climate &amp; Sustainability with Nicholas, an Energy Finance concentration, and the EDGE Center make Fuqua a global hub for climate business leadership.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">ClimateCAP</span><span class="tag">MBCS Degree</span><span class="tag">EDGE Center</span></div>
+        <div class="wins-badge"><span class="wins-num">15</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:60%"></div></div></div>
+    </article>
+
+    <article class="card p-energy" data-pillar="energy" data-id="chemistry" data-wins="11">
+      <div class="card-accent"></div>
+      <div class="card-body">
+        <div class="card-school">Department of Chemistry</div>
+        <h3>Next-Generation Renewable Energy Research</h3>
+        <p>Five faculty — Beratan, Liu, Moreno-Hernandez, Therien, and Wiley — are advancing solar photochemistry, green hydrogen electrolysis, bio-inspired light harvesting, and NSF-funded quantum coherence materials for clean energy.</p>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags"><span class="tag">Green Hydrogen</span><span class="tag">Solar Photochem</span><span class="tag">NSF Center</span></div>
+        <div class="wins-badge"><span class="wins-num">11</span><span class="wins-label">wins</span></div>
+      </div>
+      <div class="wins-bar-wrap"><div class="wins-bar-track"><div class="wins-bar-fill" style="width:44%"></div></div></div>
     </article>
 
   </div>
 </main>
 
-<!-- ═══════════════════════════ CTA STRIP ═══════════════════════════ -->
 <section class="commitment-strip">
   <h2>The Duke Climate Commitment</h2>
   <p>Launched in 2022, Duke's university-wide initiative unites research, education, operations, and community action to place society on the path toward a resilient, carbon-neutral world.</p>
-  <a class="commitment-link" href="https://climate.duke.edu" target="_blank" rel="noopener">
-    Explore the Full Commitment &rarr;
-  </a>
+  <a class="commitment-link" href="https://climate.duke.edu" target="_blank" rel="noopener">Explore the Full Commitment &rarr;</a>
 </section>
 
 <footer>
   <p>Content drawn from the <a href="https://climate.duke.edu/annual-report-2025/" target="_blank" rel="noopener">2025 State of the Duke Climate Commitment</a> and official Duke University sources. Not an official Duke publication.</p>
 </footer>
 
-<!-- ═══════════════════════════ MODAL ═══════════════════════════ -->
 <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
   <div class="modal" id="modal">
     <div class="modal-header" id="modal-header"></div>
@@ -805,9 +693,12 @@
         <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
       </div>
       <p class="modal-desc" id="modal-desc"></p>
-      <div class="wins-heading">
-        Climate Wins Documented
-        <span class="wins-count-badge" id="modal-wins-count"></span>
+      <div class="modal-wins-header">
+        <div class="wins-heading">
+          Documented Climate Wins
+          <span class="wins-count-badge" id="modal-wins-count"></span>
+        </div>
+        <span class="wins-total-note" id="modal-wins-note"></span>
       </div>
       <div class="wins-list" id="modal-wins-list"></div>
     </div>
@@ -815,120 +706,285 @@
 </div>
 
 <script>
-  /* ── Card data ── */
+  const MAX_DISPLAYED = 25;
+
   const DATA = {
-    nicholas: {
-      pillar: 'p-resilience',
-      school: 'Nicholas School of the Environment',
-      title: 'Climate Research & Environmental Leadership',
-      desc: "Duke's environmental flagship leads interdisciplinary research across climate policy, marine ecosystems, and land systems. The 2025 State of the Climate Commitment report spotlights Nicholas faculty driving breakthroughs from coastal resilience to carbon accounting. Nicholas students, researchers, and initiatives figure prominently across all five focus areas of the annual report: education, research, sustainable operations, external engagement, and community partnerships.",
-      wins: [
-        { title: '2025 Climate Commitment Report Spotlights Nicholas School', source: 'nicholas.duke.edu', url: 'https://nicholas.duke.edu/news/2025-duke-state-climate-commitment-report-highlights-nicholas-school-work' },
-        { title: 'Climate Leaders in Residence Program Launches at Duke', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/climate-leaders-residence-clir' },
-        { title: 'Duke Climate Commitment Launched with $36M in Inaugural Gifts', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/duke-university-announces-duke-climate-commitment-inaugural-gifts' }
-      ]
-    },
-    fuqua: {
-      pillar: 'p-justice',
-      school: 'Fuqua School of Business',
-      title: 'ClimateCAP & MBA Sustainability Program',
-      desc: "The ClimateCAP Initiative, led by Fuqua in partnership with 48 business schools, reached over 3,000 MBA students globally in 2024–2025. A joint 10-month Master in Business, Climate, and Sustainability with the Nicholas School bridges management and environmental science. The 2025 Fellows class was the largest and most diverse yet, with a 50%+ jump in applications drawn from MIT, Harvard, UCLA, HEC Paris, and other top programs.",
-      wins: [
-        { title: 'ClimateCAP Reaches 3,000+ MBA Students Globally', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/climatecap-initiative-for-mba-students/' },
-        { title: 'ClimateCAP Announces Largest-Ever Fellows Class for 2025', source: 'centers.fuqua.duke.edu', url: 'https://centers.fuqua.duke.edu/edge/2025/01/17/climatecap-announces-new-fellows-preps-for-summit/' },
-        { title: "Fuqua's EDGE Center: Climate & Energy Leadership Hub", source: 'centers.fuqua.duke.edu', url: 'https://centers.fuqua.duke.edu/edge/tag/climatecap/index.html' }
-      ]
-    },
     pratt: {
-      pillar: 'p-energy',
+      pillar: 'p-energy', total: 25,
       school: 'Pratt School of Engineering',
       title: 'DESIGN Climate & Clean-Energy Engineering',
-      desc: "DESIGN Climate is a $750K interdisciplinary program co-sponsored with the Nicholas School that deploys student-faculty teams to tackle real client climate challenges. The new 18-month Master of Engineering in Climate & Sustainability Engineering is structured around four pillars: energy transition, sustainable infrastructure, sustainable materials, and climate finance. Pratt's Climate Pathfinder initiative also profiles engineers driving solutions for climate resiliency.",
+      desc: "Pratt is one of Duke's most prolific contributors to the Climate Commitment. DESIGN Climate deploys interdisciplinary student-faculty teams on real client climate challenges across two project-based courses. The new 18-month Master of Engineering in Climate & Sustainability Engineering covers energy transition, sustainable infrastructure, sustainable materials, and climate finance. Faculty like Liang Feng lead cutting-edge carbon-capture research converting plastic waste into CO₂ adsorbents, and the Gendell Center for Engineering, Energy, and the Environment trains undergraduates on real energy systems from molecules to megawatts.",
       wins: [
-        { title: 'DESIGN Climate Program Drives Sustainable Innovations', source: 'pratt.duke.edu', url: 'https://pratt.duke.edu/news/sustainable-innovations-design-climate/' },
-        { title: 'New Master of Engineering in Climate & Sustainability Announced', source: 'pratt.duke.edu', url: 'https://pratt.duke.edu/news/new-master-engineering-program-will-create-climate-innovation-culture/' },
-        { title: 'Climate Pathfinder: Engineering Solutions for Climate Resiliency', source: 'today.duke.edu', url: 'https://today.duke.edu/2025/10/climate-pathfinder-how-engineering-can-offer-solutions-climate-resiliency' }
-      ]
-    },
-    chemistry: {
-      pillar: 'p-energy',
-      school: 'Department of Chemistry',
-      title: 'Next-Generation Renewable Energy Research',
-      desc: "Duke Chemistry faculty including David Beratan, Jie Liu, Ivan Moreno-Hernandez, and Michael Therien are exploring novel materials and molecular systems for renewable energy — from light harvesting to advanced battery chemistries. Benjamin Wiley leads research on green hydrogen produced by breaking down water with electricity from renewable sources, aiming to dramatically lower its cost through more efficient electrolyzers.",
-      wins: [
-        { title: '12 Research Teams Launch Climate Commitment Projects (Incl. Chemistry)', source: 'today.duke.edu', url: 'https://today.duke.edu/2023/05/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities' },
-        { title: 'Climate Commitment Annual Report Highlights Research Progress', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/12/climate-commitment-annual-report-highlights-duke-progress-climate-research-and' }
-      ]
-    },
-    marine: {
-      pillar: 'p-resilience',
-      school: 'Duke Marine Lab',
-      title: 'Oceans@Duke & Coastal Resilience',
-      desc: "Oceans@Duke has catalyzed interdisciplinary ocean research and student engagement since 2020. The Marine Lab's 2025 Oceans Week brought together students, faculty, and professionals to explore AI in marine science, plastic pollution, and ocean-related careers. The Community Science Initiative's Ready, Set, Resilience program partners with NC public schools and resilience practitioners to build climate-ready communities.",
-      wins: [
-        { title: "Duke's Marine Lab at the Frontlines of Climate Change and Ocean Sciences", source: 'today.duke.edu', url: 'https://today.duke.edu/2024/09/dukes-marine-lab-frontlines-climate-change-and-ocean-sciences' },
-        { title: 'Oceans Week 2025: Ocean Conservation, AI, and Marine Science', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/oceans-week-2025/' },
-        { title: 'Marine Lab Connects with Coastal Neighbors', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/07/marine-lab-connects-coastal-neighbors' }
-      ]
-    },
-    'nicholas-institute': {
-      pillar: 'p-data',
-      school: 'Nicholas Institute for Energy, Environment & Sustainability',
-      title: 'Climate TRACE & Data-Driven Policy',
-      desc: "The Nicholas Institute coordinates 12 interdisciplinary research teams advancing Climate Commitment priorities and anchors Climate TRACE — a global initiative using satellite imagery and machine learning to track greenhouse gas emissions at source level across every country. The Institute also runs the U.N. Climate Change Negotiations Practicum, placing Duke students inside international climate diplomacy.",
-      wins: [
-        { title: '12 Research Teams Advancing Climate Commitment Priorities', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities' },
-        { title: 'Climate TRACE: AI-Powered Global Emissions Tracking', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/climate-trace/' },
-        { title: 'National Climate Resilience Framework: Key Partner Perspectives', source: 'nicholasinstitute.duke.edu', url: 'https://nicholasinstitute.duke.edu/articles/national-climate-resilience-framework-perspectives-key-partners' }
+        {title:'Driving Sustainable Innovations with the Duke Design Climate Program', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/sustainable-innovations-design-climate/'},
+        {title:'New Master of Engineering in Climate & Sustainability Engineering Announced', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/new-master-engineering-program-will-create-climate-innovation-culture/'},
+        {title:'Planting the Seeds for a More Sustainable Future (First Cohort)', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/meng-climate-sustainability-first-cohort/'},
+        {title:'Liang Feng Wins Early Career Award for Carbon-Capture Research', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/capturing-carbon-with-plastic-garbage/'},
+        {title:'Liang Feng and Team Land Funding for Negative Emission Science', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/mems-liang-feng-and-team-land-funding-for-negative-emission-science-research/'},
+        {title:'Design Climate — Official Program Website', source:'designclimate.duke.edu', url:'https://designclimate.duke.edu/'},
+        {title:'Climate Pathfinder: How Engineering Can Offer Solutions to Resiliency', source:'today.duke.edu', url:'https://today.duke.edu/2025/10/climate-pathfinder-how-engineering-can-offer-solutions-climate-resiliency'},
+        {title:'Gendell Center for Engineering, Energy, and the Environment', source:'gendell.pratt.duke.edu', url:'https://gendell.pratt.duke.edu/'},
+        {title:'New Master of Engineering in Climate & Sustainability (Climate Commitment Report)', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/new-master-of-engineering-in-climate-and-sustainability-engineering/'},
+        {title:'Sustainable Solutions and Environmental Stewardship — Pratt Strategic Focus', source:'pratt.duke.edu', url:'https://pratt.duke.edu/about/focus/202411-climate/'},
+        {title:'Masters Students Tackle Climate Challenges in Summer Internships', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/a-summer-for-a-sustainable-future/'},
+        {title:'Resilient Systems & the Environment — Pratt Research Area', source:'pratt.duke.edu', url:'https://pratt.duke.edu/impact/research/environment/'},
+        {title:'Carbon Capture and Storage Research', source:'pratt.duke.edu', url:'https://dolbow.pratt.duke.edu/research/carbon-capture-and-storage'},
+        {title:'Interdisciplinary Teams Take a Hands-on Approach to Energy Innovations', source:'pratt.duke.edu', url:'https://pratt.duke.edu/about/news/interdisciplinary-teams-take-hands-approach-energy-innovations'},
+        {title:'In Flood-Prone NC, Climate Adaptation Meets the Data Gap', source:'today.duke.edu', url:'https://today.duke.edu/2024/08/measuring_flood_risks'},
+        {title:'Undergraduate Certificate in Energy and Environment', source:'gendell.pratt.duke.edu', url:'https://gendell.pratt.duke.edu/undergraduate-certificate-energy-and-environment'},
+        {title:'Civil & Environmental Engineering Department', source:'pratt.duke.edu', url:'https://pratt.duke.edu/academics/departments/cee/'},
+        {title:'Engineering the Acceptance of Climate Change Solutions', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/engineering-acceptance-of-solutions/'},
+        {title:'Creating Porous Materials for Enhanced Greenhouse Gas Reduction', source:'pratt.duke.edu', url:'https://pratt.duke.edu/news/new-faculty-liang-feng/'},
+        {title:'Feng Group — CO₂ Capture & Sustainable Energy Research Lab', source:'feng.pratt.duke.edu', url:'https://feng.pratt.duke.edu/'},
+        {title:'Systems for Engaging the Environment Lab (Water & Health)', source:'seel.pratt.duke.edu', url:'https://seel.pratt.duke.edu/'},
+        {title:'Duke & Partners Explore Climate Collaborations at Symposia', source:'today.duke.edu', url:'https://today.duke.edu/2024/02/duke-partners-explore-climate-collaborations-symposia'},
+        {title:'Design Climate — Climate Commitment Annual Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/design-climate/'},
+        {title:'Energy Engineering Minor', source:'pratt.duke.edu', url:'https://pratt.duke.edu/academics/undergrad/majors-minors/energy/'},
+        {title:'Sustainable Society — Pratt Strategic Vision', source:'pratt.duke.edu', url:'https://pratt.duke.edu/about/vision/sustainable/'}
       ]
     },
     sanford: {
-      pillar: 'p-justice',
+      pillar: 'p-justice', total: 25,
       school: 'Sanford School of Public Policy',
       title: 'Climate Policy, Health & Environmental Justice',
-      desc: "Ranked #2 in energy and environmental policy, Sanford provides top-tier insights advising local, national, and international policymakers. Former EPA Administrator Michael Regan joins as a Polis Distinguished Fellow for 2025–2026, deepening Sanford's climate justice leadership. Faculty research spans energy transition governance, climate health disparities, and the equitable distribution of mitigation and adaptation burdens.",
+      desc: "Ranked #2 in energy and environmental policy, Sanford shapes climate narratives and advises policymakers at every level. Former EPA Administrator Michael Regan joins as a Polis Distinguished Fellow. Faculty testify before Congress, advise international climate negotiations, and lead research spanning energy transition governance, environmental racism in North Carolina, climate health equity, and food systems resilience. Sanford's World Food Policy Center and Duke Center for International Development extend this work globally.",
       wins: [
-        { title: 'Sanford Continues to Lead in Energy & Environment Policy', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/story/sanford-continues-lead-energy-environment-policy/' },
-        { title: 'Defining Climate Justice at Duke', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/story/defining-climate-justice/' },
-        { title: 'Climate Mobility and Climate Justice: Research & Policy Advocacy', source: 'sanford.duke.edu', url: 'https://sanford.duke.edu/event/climate-mobility-and-climate-justice-state-research-and-policy-advocacy/' }
+        {title:'Sanford Continues to Lead in Energy & Environment Policy', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/sanford-continues-lead-energy-environment-policy/'},
+        {title:'Defining Climate Justice at Duke', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/defining-climate-justice/'},
+        {title:'MPP Concentration: Environment & Energy Policy', source:'sanford.duke.edu', url:'https://sanford.duke.edu/academics/masters-programs/master-public-policy/concentrations/concentration-environment-energy/'},
+        {title:'Profeta Testifies to Congress on Federal-State Partnership for Climate Action', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/profeta-testifies-congress-federal-state-partnership-climate-action/'},
+        {title:'Our Commitment to Climate', source:'sanford.duke.edu', url:'https://sanford.duke.edu/blog-post/our-commitment-climate/'},
+        {title:'2023 Wilson Lecture: Investing in Communities Key to Climate Justice', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/2023-wilson-lecture-investing-communities-key-climate-justice/'},
+        {title:'Discussing Migration, Adaptation and Aid at Duke Climate Symposium', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/discussing-migration-adaptation-and-aid-duke-climate-symposium/'},
+        {title:'James E. Rogers Energy Access Project', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/james-e-rogers-energy-access-project/'},
+        {title:'Celina Scott-Buechler: Cultivating Justice in Climate Policy', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/celina-scott-buechler-cultivating-justice-climate-policy/'},
+        {title:'Climate 21 Recommendations Submitted to New Administration', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/climate-21-recommendations-submitted-new-administration/'},
+        {title:'40 Years of Environmental Justice', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/40-years-environmental-justice/'},
+        {title:'Amplifying Stories of Environmental Racism, Resistance in North Carolina', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/amplifying-stories-environmental-racism-resistance-north-carolina/'},
+        {title:'Impact Report: Energy & Environment Policy', source:'sanford.duke.edu', url:'https://sanford.duke.edu/impact-report-energy-environment-policy/'},
+        {title:'Billions to Trillions: Can the Grid Keep Up with AI Without Derailing Climate?', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/billions-trillions-can-grid-keep-ai-without-derailing-climate-progress/'},
+        {title:'They Could Be Heroes: Data Centers in the Clean Energy Transition', source:'journal.sanford.duke.edu', url:'https://journal.sanford.duke.edu/article/they-could-be-heroes/'},
+        {title:'Resilient Communities Built on Farmer Flourishing: Climate-Ready Food Systems', source:'wfpc.sanford.duke.edu', url:'https://wfpc.sanford.duke.edu/resilient-communities-built-on-farmer-flourishing/'},
+        {title:'Alex Pfaff: Tackling Debt, Biodiversity Loss, and Climate Change', source:'sanford.duke.edu', url:'https://sanford.duke.edu/news/alex-pfaff-tackling-debt-biodiversity-loss-and-climate-change/'},
+        {title:'Climate and Sustainability — DCID Research Focus', source:'dcid.sanford.duke.edu', url:'https://dcid.sanford.duke.edu/research/climate-and-sustainability/'},
+        {title:'Climate Policy Initiative Launched at Duke', source:'sanford.duke.edu', url:'https://sanford.duke.edu/blog-post/climate-policy-initiative-launched-duke/'},
+        {title:'Climate Change, Food Systems & Sustainability — WFPC Initiative', source:'wfpc.sanford.duke.edu', url:'https://wfpc.sanford.duke.edu/research/intellectual-community-planning-grant-climate-change-food-systems-sustainability/'},
+        {title:'Environmental Justice Focus of Fall 2022 Wilson Distinguished Lecture', source:'sanford.duke.edu', url:'https://sanford.duke.edu/blog-post/environmental-justice-focus-fall-2022-wilson-distinguished-lecture/'},
+        {title:'Jainey Bavishi: Engaging Vulnerable Populations is Key to Climate Solutions', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/jainey-bavishi-pps03-engaging-vulnerable-populations-key-climate-solutions/'},
+        {title:'Theme: Energy & Environment — Sanford Faculty Research', source:'sanford.duke.edu', url:'https://sanford.duke.edu/faculty-research/key-themes/theme-energy-environment/'},
+        {title:'In It For Life: Student Voices in Duke\'s Climate Community', source:'sanford.duke.edu', url:'https://sanford.duke.edu/story/it-life-hear-student-voices-dukes-climate-community/'},
+        {title:'Brian Murray Named Director of Nicholas Institute (Sanford Announcement)', source:'sanford.duke.edu', url:'https://sanford.duke.edu/blog-post/brian-murray-named-director-nicholas-institute-energy-environment-sustainability/'}
       ]
     },
     scales: {
-      pillar: 'p-data',
+      pillar: 'p-data', total: 22,
       school: 'University-Wide Initiative',
-      title: 'SCALES — Scholars for Climate & Advanced Leadership',
-      desc: "The $10.45M SCALES Postdoctoral Fellows Program recruits early-career scholars from across Duke's 10+ schools to advance climate breakthroughs through collaborative research. Up to 24 fellows across six cohorts will be supported from 2026 to 2033. Fellows co-create high-impact research projects with faculty mentors and engage in educational efforts through Climate+, Bass Connections, and DukeEngage.",
+      title: 'SCALES, SCALe & Climate Scholar Programs',
+      desc: "Duke's cross-university climate programs create a web of climate engagement touching every school. SCALES will support 24 postdoctoral fellows across 6 cohorts (2026–2033). SCALe runs applied learning projects using Duke's campus as a living lab, offering mini grants, faculty partnerships, and Green Devil internships. Climate Scholars, Climate+, and Bass Connections provide students at every level with hands-on research experience, while the Climate and Sustainability Teaching Fellows embed climate content across disciplines.",
       wins: [
-        { title: 'SCALES Postdoctoral Fellows Program: Call for Faculty Proposals', source: 'sustainability.duke.edu', url: 'https://sustainability.duke.edu/scales-postdoctoral-fellows-program-call-faculty-proposals/' },
-        { title: 'SCALe: Sustainability and Climate Applied Learning Program', source: 'sustainability.duke.edu', url: 'https://sustainability.duke.edu/scale/' },
-        { title: 'SCALe Program Featured in Climate Commitment Annual Report', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/sustainability-and-climate-applied-learning-scale-program/' }
-      ]
-    },
-    operations: {
-      pillar: 'p-energy',
-      school: 'Office of Climate & Sustainability',
-      title: 'Sustainable Campus Operations',
-      desc: "Duke achieved carbon neutrality in FY2024 — the first large research university on the East Coast to reach this milestone. Three new off-campus solar arrays (101 MW via Pine Gate Renewables) will supply 50% of campus electricity by mid-2025. The Operations subcommittee is now developing a 2050 net-zero target that for the first time encompasses the Duke University Health System.",
-      wins: [
-        { title: 'Duke Reaches Important Milestone in Carbon Neutrality', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/10/duke-reaches-important-milestone-carbon-neutrality' },
-        { title: 'Duke Declares Victory in University Climate Pledge', source: 'today.duke.edu', url: 'https://today.duke.edu/2024/10/duke-declares-victory-university-climate-pledge' },
-        { title: 'Carbon Neutrality Achieved; 2050 Net-Zero Goal Set', source: 'climate.duke.edu', url: 'https://climate.duke.edu/annual-report/items/carbon-neutrality-goal-achieved-2050-goal-set/' }
+        {title:'SCALES Postdoctoral Fellows Program — Official Overview', source:'climate.duke.edu', url:'https://climate.duke.edu/what-were-doing/scales-postdoctoral-fellows-program/'},
+        {title:'SCALES Postdoctoral Fellows Program — Call for Faculty Proposals', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scales-postdoctoral-fellows-program-call-faculty-proposals/'},
+        {title:'Sustainability and Climate Applied Learning (SCALe) — Main Program', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/'},
+        {title:'Climate and Sustainability Teaching Fellows Program', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/climate-and-sustainability-teaching-fellows/'},
+        {title:'CAST Fellows Program — 2024-25 Request for Proposals', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/news/climate-and-sustainability-teaching-fellows-program-announces-2024-25-request-proposals/'},
+        {title:'Climate Scholars Cohort — Undergraduate Research Program', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/climate-scholars-cohort/'},
+        {title:'Climate+ Summer Research Program', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/climate-2/'},
+        {title:'SCALe Program — Climate Commitment Annual Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/sustainability-and-climate-applied-learning-scale-program/'},
+        {title:'SCALe Mini Grants — Seed Funding Program', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/grants/'},
+        {title:'SCALe Mini Grant Awardees Showcase', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale-mini-grant-awardees/'},
+        {title:'Applied Learning Project Library', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/library/'},
+        {title:'Nicholas School Scholars Programs', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/nicholas-school-scholars-programs/'},
+        {title:'Bass Connections: Energy and Environment Thematic Area', source:'bassconnections.duke.edu', url:'https://bassconnections.duke.edu/energy-and-environment'},
+        {title:'Energy and the Environment: Design and Innovation (2025-2026)', source:'bassconnections.duke.edu', url:'https://bassconnections.duke.edu/project/energy-and-environment-design-and-innovation-2025-2026/'},
+        {title:'Risk Analytics and Innovation for Community Climate Adaptation (2024-2025)', source:'bassconnections.duke.edu', url:'https://bassconnections.duke.edu/project/risk-analytics-and-innovation-community-climate-adaptation-2024-2025/'},
+        {title:'SCALe Spotlights — Student, Faculty & Staff Feature Stories', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/spotlights/'},
+        {title:'SCALe Pathways for Students', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/students/'},
+        {title:'SCALe Pathways for Faculty', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/faculty/'},
+        {title:'SCALES Postdoctoral Fellows — Faculty Letters of Intent', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scales-postdoctoral-fellows-program-call-faculty-letters-intent/'},
+        {title:'Office of Climate and Sustainability — Main Hub', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/'},
+        {title:'The Duke Climate Commitment — Main Portal', source:'climate.duke.edu', url:'https://climate.duke.edu/'},
+        {title:'SCALe Pathways for Staff', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/scale/staff/'}
       ]
     },
     athletics: {
-      pillar: 'p-athletics',
+      pillar: 'p-athletics', total: 22,
       school: 'Duke Athletics',
       title: 'Athletics Climate Team: Leaders On and Off the Field',
-      desc: "Duke Athletics launched a dedicated Climate Team to advance sustainability across its sports programs, building on years of student-athlete-led initiatives. The program mobilizes Duke's competitive culture toward measurable environmental impact — from equipment sustainability partnerships to integrating climate action into athletic identity.",
+      desc: "Duke Athletics launched a 40-member Athletics Climate Team (ACT) bringing together student-athletes, coaches, and staff across every sport. Imani Dorsey — a former All-America women's soccer player — returned to Duke specifically as the Athletics Climate & Sustainability Coordinator. Duke hosted the inaugural Collegiate Sports Sustainability Network, bringing together 75+ leaders from 50+ universities. Climate Commitment Games, uniform recycling, LED retrofits at Cameron Indoor, and the ReBounce tennis ball program make Duke Athletics a measurable force for sustainability.",
       wins: [
-        { title: 'Duke Athletics Announces Partnership with ReBounce', source: 'goduke.com', url: 'https://goduke.com/news/2026/2/12/mens-tennis-duke-athletics-announces-partnership-with-rebounce' },
-        { title: "Women's Soccer All-America Dorsey Rejoins Duke Athletics", source: 'goduke.com', url: 'https://goduke.com/news/2025/11/12/womens-soccer-all-america-dorsey-rejoins-duke-athletics' },
-        { title: 'Duke Athletics Climate Team: Leaders on and off the Field', source: 'today.duke.edu', url: 'https://today.duke.edu/2025/04/duke-athletics-climate-team-leaders-and-field' }
+        {title:'Duke Athletics Climate Team: Leaders on and off the Field', source:'today.duke.edu', url:'https://today.duke.edu/2025/04/duke-athletics-climate-team-leaders-and-field'},
+        {title:'Climate Pathfinder: A Winning Match for Athletics, Climate and Sustainability', source:'today.duke.edu', url:'https://today.duke.edu/2026/02/climate-pathfinder-winning-match-athletics-climate-and-sustainability'},
+        {title:'Climate Pathfinder: Leading the Green Devil Way', source:'today.duke.edu', url:'https://today.duke.edu/2025/04/climate-pathfinder-leading-green-devil-way'},
+        {title:'A Slam Dunk for a Sustainable Environment (Women\'s Basketball Climate Game)', source:'today.duke.edu', url:'https://today.duke.edu/2025/02/slam-dunk-sustainable-environment'},
+        {title:'Duke Athletics Announces Partnership with ReBounce', source:'goduke.com', url:'https://goduke.com/news/2026/2/12/mens-tennis-duke-athletics-announces-partnership-with-rebounce'},
+        {title:'Women\'s Soccer All-America Dorsey Rejoins Duke as Climate & Sustainability Coordinator', source:'goduke.com', url:'https://goduke.com/news/2025/11/12/womens-soccer-all-america-dorsey-rejoins-duke-athletics'},
+        {title:'Duke Student-Athletes Receive Climate Commitment Leadership Awards', source:'goduke.com', url:'https://goduke.com/news/2024/10/29/athletics-duke-student-athletes-receive-climate-commitment-leadership-awards'},
+        {title:'Blue Devils to Host Climate Commitment Game (Football)', source:'goduke.com', url:'https://goduke.com/news/2023/11/1/football-blue-devils-to-host-climate-commitment-game-on-thursday'},
+        {title:'Women\'s Hoops to Host Climate & Sustainability Game Feb. 6', source:'goduke.com', url:'https://goduke.com/news/2025/1/28/womens-basketball-womens-hoops-to-host-climate-sustainability-game-feb-6'},
+        {title:'No. 10 Duke Hosts Clemson in Climate and Sustainability Game', source:'goduke.com', url:'https://goduke.com/news/2025/2/5/womens-basketball-no-10-duke-hosts-clemson-in-climate-and-sustainability-game-sponsored-by-liberty-mutual'},
+        {title:'Collegiate Sports Sustainability Network Launched at Duke', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/collegiate-sports-sustainability-network/'},
+        {title:'Collegiate Sports Sustainability Conference Debuts New Network', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/news/collegiate-sports-sustainability-conference-debuts-new-network/'},
+        {title:'Climate and Sustainability in Athletics — Climate Commitment Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/climate-and-sustainability-in-athletics/'},
+        {title:'Athletics for Sustainability and Community — DSAG Initiatives', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/athletics-for-sustainability-and-community/'},
+        {title:'Duke Athletics Climate & Sustainability Impact Report FY2024-2025', source:'climate.duke.edu', url:'https://climate.duke.edu/wp-content/uploads/sites/91/2025/10/Duke-Athletics-Sustainability-Impact-Report_2025.pdf'},
+        {title:'Athletics — Climate & Sustainability Hub on GoDuke.com', source:'goduke.com', url:'https://goduke.com/feature/Climate?path=athletics'},
+        {title:'Sustainable Athletics Intern Program', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/project/sustainable-athletics-intern/'},
+        {title:'Energy Reduction in Krzyzewski Center and Cameron Indoor Stadium', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/project/energy-reduction-krzyzewski-center-athletic-excellence-and-cameron-indoor-stadium/'},
+        {title:'Assessing Duke Athletics Field Irrigation Efficiency', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/project/assessing-duke-athletics-field-irrigation-efficiency/'},
+        {title:'Bleed Blue and Live Green with Duke Field Hockey', source:'goduke.com', url:'https://goduke.com/news/2023/9/13/bleed-blue-and-live-green-with-duke-field-hockey'},
+        {title:'Imani Dorsey — Climate & Sustainability Coordinator (sustainability.duke.edu)', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/news/womens-soccer-all-america-dorsey-rejoins-duke-athletics/'},
+        {title:'LED Lighting Illuminates Field Hockey Venue — First NCAA Outdoor LED', source:'goduke.com', url:'https://goduke.com/news/2014/10/8/209703391'}
+      ]
+    },
+    nicholas: {
+      pillar: 'p-resilience', total: 20,
+      school: 'Nicholas School of the Environment',
+      title: 'Climate Research & Environmental Leadership',
+      desc: "The Nicholas School is central to Duke's Climate Commitment across every dimension — education, research, operations, external engagement, and community partnerships. The 2025 annual report spotlights Nicholas faculty working across five priority areas. A new joint Master in Business, Climate & Sustainability with Fuqua, a dedicated institutional Climate Action Plan, four decades of environmental justice scholarship, and a strong presence in the Climate Research Innovation Seed Program all make Nicholas the cornerstone of Duke's climate ecosystem.",
+      wins: [
+        {title:'2025 Climate Commitment Report Spotlights Nicholas School Work', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/2025-duke-state-climate-commitment-report-highlights-nicholas-school-work'},
+        {title:'Climate Leaders in Residence (CLIR) Program', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/climate-leaders-residence-clir'},
+        {title:'Duke Climate Commitment Launched with $36M in Inaugural Gifts', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/duke-university-announces-duke-climate-commitment-inaugural-gifts'},
+        {title:'Climate+ To Engage Duke Students in Data-Driven Climate Research', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/climate-engage-duke-students-data-driven-climate-research'},
+        {title:'Twelve Research Teams Launching Climate Commitment Projects', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities'},
+        {title:'New Joint Master Degree in Business, Climate, and Sustainability', source:'today.duke.edu', url:'https://today.duke.edu/2025/08/new-joint-master-degree-business-climate-and-sustainability'},
+        {title:'Climate Action Plan for the Nicholas School of the Environment', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/project/climate-action-plan-nicholas-school-environment/'},
+        {title:'Four Decades of Work on Environmental Justice at Duke', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/four-decades-work-environmental-justice-duke'},
+        {title:'Three Scenarios for the Future of Climate Change', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/three-scenarios-future-climate-change'},
+        {title:'Unsung Strategies for Sustainability', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/unsung-strategies-sustainability'},
+        {title:'Introducing the Nicholas Institute for Energy, Environment & Sustainability', source:'today.duke.edu', url:'https://today.duke.edu/2022/08/introducing-nicholas-institute-energy-environment-sustainability'},
+        {title:'Brian Murray Named Director of Nicholas Institute', source:'today.duke.edu', url:'https://today.duke.edu/2024/05/brian-murray-named-director-nicholas-institute-energy-environment-sustainability'},
+        {title:'About the Nicholas Institute for Energy, Environment & Sustainability', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/about'},
+        {title:'Duke Earth Month 2023: Taking Action for Environmental Justice', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/events/duke-earth-month-2023-taking-action-environmental-justice'},
+        {title:'Amplifying Environmental Justice: Leading the Change Speaker Series', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/events/amplifying-environmental-justice-leading-change-speaker-series'},
+        {title:'Master of Environmental Management Program', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/academics/masters-programs/master-environmental-management'},
+        {title:'We Weren\'t Always So Divided on Climate', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/we-werent-always-so-divided-climate'},
+        {title:'Brian Silliman Elected Fellow of the Ecological Society of America', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/brian-silliman-elected-fellow-ecological-society-america'},
+        {title:'Building a Sustainable Tomorrow — Academic Course', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/academics/courses/building-sustainable-tomorrow'},
+        {title:'Undergraduate Programs in Environmental Science & Policy', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/academics/undergraduate-programs'}
+      ]
+    },
+    'nicholas-institute': {
+      pillar: 'p-data', total: 20,
+      school: 'Nicholas Institute for Energy, Environment & Sustainability',
+      title: 'Climate TRACE, Heat Policy & Data-Driven Solutions',
+      desc: "The Nicholas Institute operates at the intersection of data and climate policy. Climate TRACE — now presenting potential solutions at COP30 — tracks greenhouse gas emissions at source level across every major sector worldwide using satellite imagery and machine learning. The Heat Policy Innovation Hub, the first of its kind in the U.S., develops cross-disciplinary heat policy. The Institute also coordinates 12 interdisciplinary climate research teams, runs the State Policy Program, and provides students hands-on access to international climate diplomacy through the U.N. Negotiations Practicum.",
+      wins: [
+        {title:'Climate TRACE — Global Emissions Tracking Database', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/energy-data-resources/climate-trace'},
+        {title:'Climate TRACE Identifies Solutions to Reduce Emissions at Every Major Source', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/climate-trace-identifies-potential-solutions-reduce-emissions-every-major-source'},
+        {title:'Heat Policy Innovation Hub — Program Overview', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/project/heat-policy-innovation-hub/about'},
+        {title:'Duke Launches Heat Policy Innovation Hub to Safeguard Communities', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/duke-launches-heat-policy-innovation-hub-safeguard-communities'},
+        {title:'Heat Policy Hub Offers Game Plan to Protect High School Athletes', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/heat-policy-innovation-hub-offers-game-plan-protect-high-school-athletes'},
+        {title:'Climate+ To Engage Duke Students in Data-Driven Climate Research', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/climate-engage-duke-students-data-driven-climate-research'},
+        {title:'Data-Driven Climate Solutions 2025 — Annual Report', source:'sites.nicholasinstitute.duke.edu', url:'https://sites.nicholasinstitute.duke.edu/annual-report/data-driven-climate-solutions-2025/'},
+        {title:'Climate Finance and Policy — Annual Report 2024', source:'sites.nicholasinstitute.duke.edu', url:'https://sites.nicholasinstitute.duke.edu/annual-report/climate-finance-policy-2024/'},
+        {title:'12 Research Teams Advancing Duke Climate Commitment Priorities', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities'},
+        {title:'State Policy Program — Climate & Environmental Policy Tools', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/state-policy'},
+        {title:'Ocean and Coastal Policy Program', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/ocean'},
+        {title:'Energy Access Project — Low-Carbon Energy in Emerging Economies', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/issues/energy-access'},
+        {title:'Environmental Justice Lab', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/project/environmental-justice-lab'},
+        {title:'Climate and Energy Resource Hub', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/categories/climate-and-energy'},
+        {title:'Unlocking Trillions for Clean Energy and Climate Solutions', source:'today.duke.edu', url:'https://today.duke.edu/2026/04/unlocking-trillions-clean-energy-and-climate-solutions'},
+        {title:'National Climate Resilience Framework: Key Partner Perspectives', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/articles/national-climate-resilience-framework-perspectives-key-partners'},
+        {title:'Carbon Pricing in Wholesale Energy Markets', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/publications/carbon-pricing-wholesale-energy-markets'},
+        {title:'Introducing the Nicholas Institute for Energy, Environment & Sustainability', source:'today.duke.edu', url:'https://today.duke.edu/2022/08/introducing-nicholas-institute-energy-environment-sustainability'},
+        {title:'Brian Murray Named Director of Nicholas Institute', source:'today.duke.edu', url:'https://today.duke.edu/2024/05/brian-murray-named-director-nicholas-institute-energy-environment-sustainability'},
+        {title:'Nicholas Institute — About & Mission', source:'nicholasinstitute.duke.edu', url:'https://nicholasinstitute.duke.edu/about'}
+      ]
+    },
+    operations: {
+      pillar: 'p-energy', total: 17,
+      school: 'Office of Climate & Sustainability',
+      title: 'Sustainable Campus Operations',
+      desc: "Duke achieved carbon neutrality in FY2024 — the first large research university on the East Coast to reach this milestone, honoring a pledge made in 2007. A 101 MW solar partnership with Pine Gate Renewables will supply 50% of campus electricity by mid-2025. Duke's campus has expanded substantially while cutting absolute emissions. The Operations subcommittee is now developing a 2050 net-zero target that for the first time encompasses the entire Duke University Health System.",
+      wins: [
+        {title:'Duke Reaches Important Milestone in Carbon Neutrality', source:'today.duke.edu', url:'https://today.duke.edu/2024/10/duke-reaches-important-milestone-carbon-neutrality'},
+        {title:"Duke's Journey to Carbon Neutrality", source:'today.duke.edu', url:"https://today.duke.edu/2024/10/dukes-journey-carbon-neutrality"},
+        {title:'Duke Declares Victory in University Climate Pledge', source:'today.duke.edu', url:'https://today.duke.edu/2024/10/duke-declares-victory-university-climate-pledge'},
+        {title:'Already Looking Ahead to Next Steps (2025 Solar & Net Zero)', source:'today.duke.edu', url:'https://today.duke.edu/2024/10/already-looking-ahead-next-steps'},
+        {title:'Growing the Campus and Shrinking Emissions at the Same Time', source:'today.duke.edu', url:'https://today.duke.edu/2024/10/growing-campus-and-shrinking-emissions-same-time'},
+        {title:'Historic Solar Deal Powers Duke Toward Carbon Neutrality (101 MW)', source:'today.duke.edu', url:'https://today.duke.edu/2020/08/historic-solar-deal-powers-duke-u-toward-carbon-neutrality'},
+        {title:'Carbon Neutrality Goal Achieved; 2050 Net-Zero Goal Set', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/carbon-neutrality-goal-achieved-2050-goal-set/'},
+        {title:'Sustainable Operations Archives — Climate Commitment', source:'climate.duke.edu', url:'https://climate.duke.edu/pillars/sustainable-operations/'},
+        {title:'GHG Emissions Tracking — Office of Climate and Sustainability', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/operations/ghg-emissions/'},
+        {title:'Energy Operations — Office of Climate and Sustainability', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/operations/energy/'},
+        {title:'Buildings — Green Building Standards', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/operations/buildings/'},
+        {title:'Transportation — Fleet Electrification', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/operations/transportation/'},
+        {title:'Water Conservation Operations', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/operations/water/'},
+        {title:'Sustainability Strategic Plan', source:'sustainability.duke.edu', url:'https://sustainability.duke.edu/commitments/ssp/'},
+        {title:'Green Buildings — Duke Facilities Management', source:'facilities.duke.edu', url:'https://facilities.duke.edu/what-we-do/energy-resource-management/green-buildings/'},
+        {title:'2025 State of the Duke Climate Commitment Annual Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report-2025/'},
+        {title:'Working@Duke Turns 20: Two Decades of Sustainability Successes', source:'today.duke.edu', url:'https://today.duke.edu/2026/04/workingduke-turns-20-documenting-two-decades-sustainability-successes'}
+      ]
+    },
+    marine: {
+      pillar: 'p-resilience', total: 16,
+      school: 'Duke Marine Lab',
+      title: 'Oceans@Duke & Coastal Resilience',
+      desc: "The Duke Marine Lab — operating for over 85 years from its Beaufort, NC base — places scientists at the frontline of ocean acidification, salt marsh restoration, whale monitoring, and coastal community resilience. Oceans Week 2025 convened students, faculty, and professionals around AI in marine science and plastic pollution. The Marine Geospatial Ecology Lab applies cutting-edge spatial analysis to climate and biodiversity. The Ready, Set, Resilience K–12 program connects coastal school children to climate science through storytelling and hands-on curriculum.",
+      wins: [
+        {title:"Duke's Marine Lab at the Frontlines of Climate Change and Ocean Sciences", source:'today.duke.edu', url:'https://today.duke.edu/2024/09/dukes-marine-lab-frontlines-climate-change-and-ocean-sciences'},
+        {title:'Marine Lab Connects with Coastal Neighbors', source:'today.duke.edu', url:'https://today.duke.edu/2024/07/marine-lab-connects-coastal-neighbors'},
+        {title:'Duke Marine Lab Origins: Science With a Community Connection', source:'today.duke.edu', url:'https://today.duke.edu/2024/09/duke-marine-lab-origins-science-community-connection'},
+        {title:'Oceans — Climate Commitment Focus Area', source:'climate.duke.edu', url:'https://climate.duke.edu/focus-areas/oceans/'},
+        {title:'Oceans Week 2025 — Climate Commitment Annual Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/oceans-week-2025/'},
+        {title:'Forever Learning Weekend at the Duke Marine Lab', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/forever-learning-weekend-at-the-duke-marine-lab/'},
+        {title:'Ready, Set, Resilience — Climate Commitment Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/ready-set-resilience/'},
+        {title:'Ready, Set, Resilience — Marine Lab Community Science Initiative', source:'sites.duke.edu', url:'https://sites.duke.edu/communityscience/ready-set-resilience/'},
+        {title:'Organismal Responses to Climate Change in the Sea', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/organismal-responses-climate-change-sea'},
+        {title:"Marine Lab's Grant Murray: Interdisciplinary Approach to Coastal Issues", source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/marine-labs-grant-murray-takes-interdisciplinary-approach-coastal-issues'},
+        {title:'NSOE Lab of the Month: Ocean Synthesis Lab', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/nsoe-lab-month-ocean-synthesis-lab'},
+        {title:'Conservation with Communities in Rural, Coastal NC — DukeEngage', source:'dukeengage.duke.edu', url:'https://dukeengage.duke.edu/program/marine-lab/'},
+        {title:'Marine Geospatial Ecology Lab', source:'mgel.env.duke.edu', url:'https://mgel.env.duke.edu/'},
+        {title:'Sticky Fish in a Changing Climate — MGEL Research', source:'mgel.env.duke.edu', url:'https://mgel.env.duke.edu/sticky-fish-in-a-changing-climate/'},
+        {title:'Ocean Synthesis Lab — Marine Social-Ecological Systems', source:'sites.duke.edu', url:'https://sites.duke.edu/davidgill/'},
+        {title:'2025 Nicholas School Climate Report (Marine Lab Highlights)', source:'nicholas.duke.edu', url:'https://nicholas.duke.edu/news/2025-duke-state-climate-commitment-report-highlights-nicholas-school-work'}
+      ]
+    },
+    fuqua: {
+      pillar: 'p-justice', total: 15,
+      school: 'Fuqua School of Business',
+      title: 'ClimateCAP & MBA Sustainability Program',
+      desc: "Fuqua is Duke's bridge between climate science and business strategy. The EDGE Center leads ClimateCAP — a 48-school global initiative that reached 3,000+ MBA students in 2024–25 and launched ClimateCATALYST for 500+ incoming MBA students. The new joint Master in Business, Climate & Sustainability with the Nicholas School launches July 2026. Fuqua also offers an Energy Finance concentration, an ESG resources center, and dual MEM/MBA and MF/MBA degrees.",
+      wins: [
+        {title:'Master in Business, Climate, and Sustainability (MBCS)', source:'fuqua.duke.edu', url:'https://www.fuqua.duke.edu/programs/mbcs'},
+        {title:'ClimateCAP Initiative for MBA Students — Climate Commitment Report', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/climatecap-initiative-for-mba-students/'},
+        {title:'New Joint Master Degree in Business, Climate, and Sustainability', source:'today.duke.edu', url:'https://today.duke.edu/2025/08/new-joint-master-degree-business-climate-and-sustainability'},
+        {title:'ClimateCAP Announces Largest-Ever Fellows Class for 2025', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/2025/01/17/climatecap-announces-new-fellows-preps-for-summit/'},
+        {title:'EDGE Center — Climate & Energy Leadership Hub', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/'},
+        {title:'Fuqua Launches New Energy Finance Concentration and Sustainability Courses', source:'fuqua.duke.edu', url:'https://www.fuqua.duke.edu/duke-fuqua-insights/fuqua-launches-energy-finance-sustainability-course'},
+        {title:'Energy Pathways USA — Net-Zero Carbon Transition Initiative', source:'climate.duke.edu', url:'https://climate.duke.edu/annual-report/items/energy-pathways-usa/'},
+        {title:'Five Ways to Launch Your Climate Career in B-School', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/2024/05/29/five-ways-to-launch-your-climate-career-in-b-school/'},
+        {title:'New Book on Climate & Sustainability Careers by Katie Kross', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/2026/03/17/new-book-on-climate-sustainability-careers-by-katie-kross/'},
+        {title:'Fuqua Student Internships in Energy, Sustainability, and Climate 2025', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/2025/06/16/fuqua-student-internships-in-energy-sustainability-and-climate-in-2025/'},
+        {title:'MEM/MBA and MF/MBA Dual Degrees', source:'fuqua.duke.edu', url:'https://www.fuqua.duke.edu/programs/daytime-mba/mem-mmfmba-dual-degree'},
+        {title:'Three Reasons Companies Are Being Proactive About Climate Change', source:'fuqua.duke.edu', url:'https://www.fuqua.duke.edu/duke-fuqua-insights/three-reasons-companies-are-being-proactive-about-climate-change'},
+        {title:'Power Shift: The Business Role in Addressing Climate Change', source:'fuqua.duke.edu', url:'https://www.fuqua.duke.edu/duke-fuqua-insights/vermeer-climate-change'},
+        {title:'ESG Standards Resources — Fuqua CASE Center', source:'case.fuqua.duke.edu', url:'https://case.fuqua.duke.edu/esg-standards/'},
+        {title:'The Proposed SEC Climate Disclosure Rule — EDGE Educational Content', source:'centers.fuqua.duke.edu', url:'https://centers.fuqua.duke.edu/edge/2022/03/23/the-proposed-sec-climate-disclosure-rule-and-what-it-means-for-students/'}
+      ]
+    },
+    chemistry: {
+      pillar: 'p-energy', total: 11,
+      school: 'Department of Chemistry',
+      title: 'Next-Generation Renewable Energy Research',
+      desc: "Five Duke Chemistry faculty — Beratan, Liu, Moreno-Hernandez, Therien, and Wiley — are funded through the Climate Research Innovation Seed Program to advance renewable energy science. Therien's three-decade DOE-funded program uses plant leaves as a guide for bio-inspired solar harvesting. Beratan and Therien lead an NSF Center for Synthesizing Quantum Coherence. Wiley develops low-cost microfiber electrodes for green hydrogen. Liu converts solar energy into transportable hydrogen fuels. Moreno-Hernandez's NSF CAREER work advances electrocatalysis for renewable chemical production.",
+      wins: [
+        {title:'Harnessing Solar Energy to Deliver Hydrogen Where It\'s Most Needed (Liu)', source:'chem.duke.edu', url:'https://chem.duke.edu/news/harnessing-solar-energy-deliver-hydrogen-where-its-most-needed'},
+        {title:'Ben Wiley Receives Clean Energy Research Innovation Award', source:'chem.duke.edu', url:'https://chem.duke.edu/news/ben-wiley-receives-clean-energy-research-innovation-award'},
+        {title:'Solar Photochemistry Breakthrough Reported by Beratan & Therien', source:'chem.duke.edu', url:'https://chem.duke.edu/news/solar-photochemistry-breakthrough-reported-beratan-group'},
+        {title:'Turning Light Into Energy, With Plant Leaves as a Guide (Therien)', source:'chem.duke.edu', url:'https://chem.duke.edu/news/turning-light-energy-plant-leaves-guide'},
+        {title:'Beratan and Therien Leading New NSF Center for Chemical Innovation', source:'chem.duke.edu', url:'https://chem.duke.edu/news/beratan-and-therien-leading-new-nsf-center-chemical-innovation'},
+        {title:'Ivan Moreno-Hernandez Receives NSF CAREER Award for Electrocatalysis', source:'chem.duke.edu', url:'https://chem.duke.edu/news/ivan-moreno-hernandez-receives-nsf-career'},
+        {title:'Nanoscale Movies Shed Light on One Barrier to a Clean Energy Future', source:'today.duke.edu', url:'https://today.duke.edu/2024/04/nanoscale-movies-shed-light-one-barrier-clean-energy-future'},
+        {title:'12 Research Teams Launch Climate Commitment Projects (Incl. 5 Chemistry Faculty)', source:'today.duke.edu', url:'https://today.duke.edu/2023/05/twelve-research-teams-launching-projects-advance-duke-climate-commitment-priorities'},
+        {title:'Incorporating Climate & Sustainability into Classes Across Duke (Chemistry)', source:'chem.duke.edu', url:'https://chem.duke.edu/news/incorporating-climate-sustainability-classes-across-duke'},
+        {title:'Beratan Group Explains New Class of Electron Bifurcation Reactions', source:'chem.duke.edu', url:'https://chem.duke.edu/news/beratan-group-explains-new-class-electron-bifurcation-reactions'},
+        {title:'One Universal Free-Energy Landscape Supports Efficient Electron Bifurcation', source:'chem.duke.edu', url:'https://chem.duke.edu/news/one-universal-free-energy-landscape-supports-efficient-electron-bifurcation-reactions'}
       ]
     }
   };
 
-  /* ── Filter logic ── */
+  /* ── Filter ── */
   const buttons = document.querySelectorAll('.pillar-btn');
   const cards   = document.querySelectorAll('.card');
   const counter = document.getElementById('card-count');
@@ -953,10 +1009,10 @@
   });
   updateCount(cards.length);
 
-  /* ── Modal logic ── */
-  const overlay   = document.getElementById('modal-overlay');
-  const modal     = document.getElementById('modal');
-  const closeBtn  = document.getElementById('modal-close');
+  /* ── Modal ── */
+  const overlay  = document.getElementById('modal-overlay');
+  const modal    = document.getElementById('modal');
+  const closeBtn = document.getElementById('modal-close');
 
   function openModal(id) {
     const d = DATA[id];
@@ -966,7 +1022,11 @@
     document.getElementById('modal-school').textContent = d.school;
     document.getElementById('modal-title').textContent  = d.title;
     document.getElementById('modal-desc').textContent   = d.desc;
-    document.getElementById('modal-wins-count').textContent = d.wins.length;
+    document.getElementById('modal-wins-count').textContent = d.total;
+
+    const displayed = d.wins.length;
+    const note = document.getElementById('modal-wins-note');
+    note.textContent = displayed < d.total ? `Showing ${displayed} of ${d.total} documented` : `${d.total} total documented`;
 
     const list = document.getElementById('modal-wins-list');
     list.innerHTML = d.wins.map((w, i) => `
@@ -989,10 +1049,7 @@
     document.body.style.overflow = '';
   }
 
-  cards.forEach(card => {
-    card.addEventListener('click', () => openModal(card.dataset.id));
-  });
-
+  cards.forEach(card => card.addEventListener('click', () => openModal(card.dataset.id)));
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
