@@ -534,7 +534,6 @@
       transition: opacity 0.35s, background 0.15s;
     }
     .bar-row:hover { background: var(--gray-100); }
-    .bar-row:hover .bar-fill { filter: brightness(1.08); }
     .bar-row.dimmed { opacity: 0.18; pointer-events: none; }
     .bar-label {
       font-family: 'Arial', sans-serif;
@@ -559,18 +558,67 @@
       overflow: hidden;
       position: relative;
     }
-    .bar-fill {
+    /* stacked category bars */
+    .bar-stacked {
+      display: flex;
       height: 100%;
-      border-radius: 999px;
       width: 0;
+      border-radius: 999px;
+      overflow: hidden;
       transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .bar-fill.animated { width: var(--tw); }
-    .bar-fill.p-energy    { background: linear-gradient(90deg, #e67e22, #f5a623); }
-    .bar-fill.p-resilience { background: linear-gradient(90deg, #27ae60, #52c97b); }
-    .bar-fill.p-justice   { background: linear-gradient(90deg, #8e44ad, #b163d0); }
-    .bar-fill.p-data      { background: linear-gradient(90deg, #1a7a8a, #22aabf); }
-    .bar-fill.p-athletics { background: linear-gradient(90deg, #012169, #1a4a9e); }
+    .bar-stacked.animated { width: var(--tw); }
+    .bar-row:hover .seg { filter: brightness(1.1); }
+    .seg { height: 100%; min-width: 0; }
+    .seg-education  { background: #2563eb; }
+    .seg-research   { background: #0891b2; }
+    .seg-ops        { background: #059669; }
+    .seg-external   { background: #ea580c; }
+    .seg-community  { background: #db2777; }
+    .seg-org        { background: #64748b; }
+
+    /* category legend strip */
+    .cat-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 18px;
+    }
+    .cat-chip {
+      font-family: 'Arial', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .cat-chip.cat-education  { background: #2563eb; }
+    .cat-chip.cat-research   { background: #0891b2; }
+    .cat-chip.cat-ops        { background: #059669; }
+    .cat-chip.cat-external   { background: #ea580c; }
+    .cat-chip.cat-community  { background: #db2777; }
+    .cat-chip.cat-org        { background: #64748b; }
+
+    /* category chip on modal win items */
+    .win-cat {
+      display: inline-block;
+      margin-top: 4px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      padding: 1px 7px;
+      border-radius: 20px;
+      color: #fff;
+    }
+    .win-cat.cat-education  { background: #2563eb; }
+    .win-cat.cat-research   { background: #0891b2; }
+    .win-cat.cat-ops        { background: #059669; }
+    .win-cat.cat-external   { background: #ea580c; }
+    .win-cat.cat-community  { background: #db2777; }
+    .win-cat.cat-org        { background: #64748b; }
 
     .bar-count {
       font-family: 'Arial', sans-serif;
@@ -668,6 +716,14 @@
       </div>
     </div>
     <div class="chart-bars" id="chart-bars"></div>
+    <div class="cat-legend">
+      <span class="cat-chip cat-education">Education</span>
+      <span class="cat-chip cat-research">Research</span>
+      <span class="cat-chip cat-ops">Sustainable Operations</span>
+      <span class="cat-chip cat-external">External Engagement</span>
+      <span class="cat-chip cat-community">Community Partnerships</span>
+      <span class="cat-chip cat-org">Organizational Structures</span>
+    </div>
     <div class="chart-footer">
       <span class="chart-total"><strong>193</strong> documented wins across 10 areas</span>
       <div class="sort-toggle">
@@ -924,16 +980,21 @@
     note.textContent = displayed < d.total ? `Showing ${displayed} of ${d.total} documented` : `${d.total} total documented`;
 
     const list = document.getElementById('modal-wins-list');
-    list.innerHTML = d.wins.map((w, i) => `
+    list.innerHTML = d.wins.map((w, i) => {
+      const catChip = w.category
+        ? `<span class="win-cat cat-${CAT_KEY[w.category]}">${w.category}</span>`
+        : '';
+      return `
       <a class="win-item" href="${w.url}" target="_blank" rel="noopener">
         <span class="win-num">${i + 1}</span>
         <span class="win-text">
           <span class="win-title">${w.title}</span>
           <span class="win-source">${w.source}</span>
+          ${catChip}
         </span>
         <span class="win-arrow">↗</span>
-      </a>
-    `).join('');
+      </a>`;
+    }).join('');
 
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -967,6 +1028,16 @@
     chemistry: ['Chemistry Dept.', 'Renewable Energy Research'],
   };
 
+  const CAT_ORDER = ['Education','Research','Sustainable Operations','External Engagement','Community Partnerships','Organizational Structures'];
+  const CAT_KEY   = {
+    'Education':               'education',
+    'Research':                'research',
+    'Sustainable Operations':  'ops',
+    'External Engagement':     'external',
+    'Community Partnerships':  'community',
+    'Organizational Structures': 'org',
+  };
+
   let chartFilter = null;
   let chartSort   = 'wins';
 
@@ -981,13 +1052,23 @@
       const dim = chartFilter && d.pillar !== chartFilter;
       const [name, sub] = SHORT_NAMES[id];
 
+      // tally category counts for this area
+      const counts = {};
+      CAT_ORDER.forEach(c => counts[c] = 0);
+      d.wins.forEach(w => { if (w.category) counts[w.category] = (counts[w.category] || 0) + 1; });
+
+      const segments = CAT_ORDER
+        .filter(cat => counts[cat] > 0)
+        .map(cat => `<div class="seg seg-${CAT_KEY[cat]}" style="flex:${counts[cat]}" title="${cat}: ${counts[cat]}"></div>`)
+        .join('');
+
       const row = document.createElement('div');
       row.className = 'bar-row' + (dim ? ' dimmed' : '');
       row.dataset.id = id;
       row.innerHTML = `
         <div class="bar-label">${name}<small>${sub}</small></div>
         <div class="bar-track">
-          <div class="bar-fill ${d.pillar}" style="--tw:${pct}%"></div>
+          <div class="bar-stacked" style="--tw:${pct}%">${segments}</div>
         </div>
         <div class="bar-count">${d.total}</div>`;
       row.addEventListener('click', () => openModal(id));
@@ -995,8 +1076,8 @@
     });
 
     requestAnimationFrame(() => {
-      container.querySelectorAll('.bar-fill').forEach((fill, i) => {
-        setTimeout(() => fill.classList.add('animated'), 60 + i * 55);
+      container.querySelectorAll('.bar-stacked').forEach((bar, i) => {
+        setTimeout(() => bar.classList.add('animated'), 60 + i * 55);
       });
     });
   }
