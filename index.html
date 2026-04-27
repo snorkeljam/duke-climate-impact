@@ -511,35 +511,6 @@
     }
     .chart-title { font-size: 1.4rem; font-weight: 700; color: var(--duke-blue); margin-bottom: 4px; }
     .chart-subtitle { font-family: 'Arial', sans-serif; font-size: 0.83rem; color: var(--gray-600); }
-    .chart-legend {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-family: 'Arial', sans-serif;
-      font-size: 0.73rem;
-      font-weight: 600;
-      color: var(--gray-600);
-      cursor: pointer;
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1.5px solid transparent;
-      transition: all 0.2s;
-      user-select: none;
-    }
-    .legend-item:hover { background: var(--gray-100); color: var(--gray-800); }
-    .legend-item.active { border-color: currentColor; color: var(--gray-800); background: var(--gray-100); }
-    .legend-item.active.le-energy { color: var(--amber); background: var(--amber-light); border-color: var(--amber); }
-    .legend-item.active.le-resilience { color: var(--green); background: var(--green-light); border-color: var(--green); }
-    .legend-item.active.le-justice { color: var(--purple); background: #f3eafd; border-color: var(--purple); }
-    .legend-item.active.le-data { color: var(--teal); background: #e6f7fa; border-color: var(--teal); }
-    .legend-item.active.le-athletics { color: var(--duke-blue); background: #e8ecf4; border-color: var(--duke-blue); }
-    .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
 
     .chart-bars { display: flex; flex-direction: column; gap: 8px; }
     .bar-row {
@@ -726,13 +697,6 @@
       <div>
         <h2 class="chart-title">Impact by the Numbers</h2>
         <p class="chart-subtitle">Documented public climate wins per area — click any bar to explore all sources</p>
-      </div>
-      <div class="chart-legend">
-        <button class="legend-item le-energy" data-pillar="p-energy"><span class="legend-dot dot-energy"></span>Energy</button>
-        <button class="legend-item le-resilience" data-pillar="p-resilience"><span class="legend-dot dot-resilience"></span>Resilience</button>
-        <button class="legend-item le-justice" data-pillar="p-justice"><span class="legend-dot dot-justice"></span>Justice</button>
-        <button class="legend-item le-data" data-pillar="p-data"><span class="legend-dot dot-data"></span>Data</button>
-        <button class="legend-item le-athletics" data-pillar="p-athletics"><span class="legend-dot dot-athletics"></span>Athletics</button>
       </div>
     </div>
     <div class="chart-bars" id="chart-bars"></div>
@@ -1058,8 +1022,7 @@
     'Organizational Structures': 'org',
   };
 
-  let chartFilter = null;
-  let chartSort   = 'wins';
+  let chartSort = 'wins';
 
   function renderChart() {
     const order = chartSort === 'alpha' ? CHART_ORDER_ALPHA : CHART_ORDER_WINS;
@@ -1069,7 +1032,6 @@
     order.forEach(id => {
       const d   = DATA[id];
       const pct = ((d.total / MAX_WINS) * 100).toFixed(1);
-      const dim = chartFilter && d.pillar !== chartFilter;
       const [name, sub] = SHORT_NAMES[id];
 
       // tally category counts for this area
@@ -1083,7 +1045,7 @@
         .join('');
 
       const row = document.createElement('div');
-      row.className = 'bar-row' + (dim ? ' dimmed' : '');
+      row.className = 'bar-row';
       row.dataset.id = id;
       row.innerHTML = `
         <div class="bar-label">${name}<small>${sub}</small></div>
@@ -1103,24 +1065,6 @@
   }
 
   renderChart();
-
-  /* legend filter */
-  document.querySelectorAll('.legend-item').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const p = btn.dataset.pillar;
-      if (chartFilter === p) {
-        chartFilter = null;
-        document.querySelectorAll('.legend-item').forEach(l => l.classList.remove('active'));
-      } else {
-        chartFilter = p;
-        document.querySelectorAll('.legend-item').forEach(l => l.classList.toggle('active', l.dataset.pillar === p));
-      }
-      document.querySelectorAll('.bar-row').forEach(r => {
-        r.classList.toggle('dimmed', !!chartFilter && DATA[r.dataset.id].pillar !== chartFilter);
-        r.style.pointerEvents = (chartFilter && DATA[r.dataset.id].pillar !== chartFilter) ? 'none' : '';
-      });
-    });
-  });
 
   /* sort toggle */
   document.querySelectorAll('.sort-btn').forEach(btn => {
