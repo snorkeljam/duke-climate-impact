@@ -74,8 +74,27 @@
     .hero p {
       font-size: 1.1rem;
       max-width: 640px;
-      margin: 0 auto 32px;
+      margin: 0 auto 20px;
       opacity: 0.88;
+    }
+    .hero-data-link {
+      display: inline-block;
+      margin-bottom: 32px;
+      font-family: 'Arial', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 999px;
+      padding: 6px 18px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-data-link:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
     }
     .hero-stats {
       display: flex;
@@ -679,6 +698,7 @@
   <div class="hero-badge">Duke University</div>
   <h1>Where <em>Climate Action</em><br>Meets Academic Excellence</h1>
   <p>Discover how Duke's schools, institutes, and programs are advancing the Duke Climate Commitment — working toward a carbon-neutral, resilient world by 2030.</p>
+  <a class="hero-data-link" href="data.html">See the Data ↗</a>
   <div class="hero-stats">
     <div class="stat">
       <span class="stat-num">10</span>
