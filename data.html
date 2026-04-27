@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data View — Duke Climate Impact</title>
+  <style>
+    :root {
+      --duke-blue:   #012169;
+      --duke-navy:   #001457;
+      --duke-gold:   #C84E00;
+      --bg:          #f4f6f9;
+      --surface:     #ffffff;
+      --border:      #dde2ec;
+      --text:        #1a2035;
+      --muted:       #6b7a99;
+      --radius:      8px;
+
+      /* pillar chips */
+      --c-energy:    #d97706;
+      --c-resilience:#16a34a;
+      --c-justice:   #7c3aed;
+      --c-data:      #0d9488;
+      --c-athletics: #012169;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    /* ─── Header ─────────────────────────── */
+    .page-header {
+      background: var(--duke-blue);
+      color: #fff;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .page-header h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .page-header h1 span {
+      opacity: .6;
+      font-weight: 400;
+      margin-left: 6px;
+      font-size: .9rem;
+    }
+    .header-back {
+      color: rgba(255,255,255,.8);
+      text-decoration: none;
+      font-size: .82rem;
+      border: 1px solid rgba(255,255,255,.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+      transition: background .15s;
+    }
+    .header-back:hover { background: rgba(255,255,255,.12); }
+
+    /* ─── Controls ─────────────────────────── */
+    .controls {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 28px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .controls input[type="search"] {
+      flex: 1 1 220px;
+      padding: 7px 12px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: .875rem;
+      outline: none;
+      color: var(--text);
+    }
+    .controls input[type="search"]:focus {
+      border-color: var(--duke-blue);
+      box-shadow: 0 0 0 3px rgba(1,33,105,.1);
+    }
+    .controls select {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: .875rem;
+      color: var(--text);
+      background: #fff;
+      cursor: pointer;
+      outline: none;
+    }
+    .controls select:focus { border-color: var(--duke-blue); }
+    .controls-spacer { flex: 1; }
+    .btn-csv {
+      padding: 7px 16px;
+      background: var(--duke-blue);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s;
+    }
+    .btn-csv:hover { background: var(--duke-navy); }
+
+    /* ─── Status bar ─────────────────────────── */
+    .status-bar {
+      padding: 8px 28px;
+      font-size: .8rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    #row-count { font-weight: 600; color: var(--text); }
+
+    /* ─── Table wrapper ─────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+      padding: 0 28px 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.07);
+    }
+
+    thead th {
+      background: var(--duke-blue);
+      color: #fff;
+      text-align: left;
+      padding: 10px 14px;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+      position: sticky;
+      top: 0;
+    }
+    thead th:hover { background: #02297a; }
+    thead th.sorted-asc::after  { content: ' ▲'; opacity: .8; }
+    thead th.sorted-desc::after { content: ' ▼'; opacity: .8; }
+    thead th.no-sort { cursor: default; }
+    thead th.no-sort:hover { background: var(--duke-blue); }
+
+    tbody tr { border-bottom: 1px solid var(--border); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f0f4ff; }
+
+    td {
+      padding: 9px 14px;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    /* column widths */
+    .col-num    { width: 44px; text-align: right; color: var(--muted); font-size: .78rem; }
+    .col-area   { min-width: 140px; }
+    .col-pillar { width: 110px; }
+    .col-cat    { width: 160px; }
+    .col-title  { min-width: 260px; }
+    .col-source { min-width: 120px; }
+
+    /* pillar chip */
+    .pillar-chip {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 20px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .chip-energy     { background: var(--c-energy); }
+    .chip-resilience { background: var(--c-resilience); }
+    .chip-justice    { background: var(--c-justice); }
+    .chip-data       { background: var(--c-data); }
+    .chip-athletics  { background: var(--c-athletics); }
+
+    /* category chip */
+    .cat-chip {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: .72rem;
+      font-weight: 600;
+      background: #e8ecf5;
+      color: #3a4a7a;
+      white-space: nowrap;
+    }
+    .cat-null {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* title link */
+    .win-link {
+      color: var(--duke-blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .win-link:hover { text-decoration: underline; }
+
+    /* source badge */
+    .source-badge {
+      font-size: .75rem;
+      color: var(--muted);
+      font-family: 'SF Mono', 'Fira Mono', monospace;
+    }
+
+    /* empty state */
+    .empty-row td {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    /* loading state */
+    .loading {
+      text-align: center;
+      padding: 60px 28px;
+      color: var(--muted);
+    }
+    .loading::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--duke-blue);
+      border-radius: 50%;
+      margin: 0 auto 16px;
+      animation: spin .8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+<header class="page-header">
+  <h1>Duke Climate Impact <span>/ Data View</span></h1>
+  <a href="index.html" class="header-back">← Back to Site</a>
+</header>
+
+<div class="controls">
+  <input type="search" id="search-box" placeholder="Search titles, sources…" />
+  <select id="filter-area">
+    <option value="">All Areas</option>
+  </select>
+  <select id="filter-pillar">
+    <option value="">All Pillars</option>
+    <option value="p-energy">Energy</option>
+    <option value="p-resilience">Resilience</option>
+    <option value="p-justice">Justice</option>
+    <option value="p-data">Data</option>
+    <option value="p-athletics">Athletics</option>
+  </select>
+  <select id="filter-category">
+    <option value="">All Categories</option>
+    <option value="Education">Education</option>
+    <option value="Research">Research</option>
+    <option value="Sustainable Operations">Sustainable Operations</option>
+    <option value="External Engagement">External Engagement</option>
+    <option value="Community Partnerships">Community Partnerships</option>
+    <option value="Organizational Structures">Organizational Structures</option>
+    <option value="__null">— Uncategorized</option>
+  </select>
+  <div class="controls-spacer"></div>
+  <button class="btn-csv" id="btn-csv">⬇ Export CSV</button>
+</div>
+
+<div class="status-bar">
+  <span>Showing <span id="row-count">…</span> wins</span>
+  <span id="filter-hint"></span>
+</div>
+
+<div class="table-wrap">
+  <div class="loading" id="loading-state">Loading data…</div>
+  <table id="data-table" style="display:none">
+    <thead>
+      <tr>
+        <th class="col-num no-sort">#</th>
+        <th class="col-area"     data-col="areaName">Area</th>
+        <th class="col-pillar"   data-col="pillarLabel">Pillar</th>
+        <th class="col-cat"      data-col="category">Category</th>
+        <th class="col-title"    data-col="title">Win Title</th>
+        <th class="col-source"   data-col="source">Source</th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+
+<script>
+  /* ── Pillar display helpers ───────────────────────── */
+  const PILLAR_LABELS = {
+    'p-energy':     { label: 'Energy',     chip: 'chip-energy' },
+    'p-resilience': { label: 'Resilience', chip: 'chip-resilience' },
+    'p-justice':    { label: 'Justice',    chip: 'chip-justice' },
+    'p-data':       { label: 'Data',       chip: 'chip-data' },
+    'p-athletics':  { label: 'Athletics',  chip: 'chip-athletics' },
+  };
+
+  /* ── State ───────────────────────────────────────── */
+  let ALL_ROWS = [];   // flat array of row objects
+  let sortCol  = 'areaName';
+  let sortDir  = 1;    // 1 = asc, -1 = desc
+
+  /* ── Load data ───────────────────────────────────── */
+  fetch('data.json')
+    .then(r => r.json())
+    .then(data => {
+      // Flatten to row objects
+      ALL_ROWS = [];
+      for (const [id, area] of Object.entries(data)) {
+        const pillarInfo = PILLAR_LABELS[area.pillar] || { label: area.pillar, chip: '' };
+        area.wins.forEach(win => {
+          ALL_ROWS.push({
+            areaId:      id,
+            areaName:    area.school,
+            areaTitle:   area.title,
+            pillar:      area.pillar,
+            pillarLabel: pillarInfo.label,
+            pillarChip:  pillarInfo.chip,
+            category:    win.category,
+            title:       win.title,
+            source:      win.source,
+            url:         win.url,
+          });
+        });
+      }
+
+      // Populate area dropdown
+      const areaSelect = document.getElementById('filter-area');
+      const areaNames  = [...new Map(ALL_ROWS.map(r => [r.areaId, r.areaName]))];
+      areaNames.forEach(([id, name]) => {
+        const opt = document.createElement('option');
+        opt.value = id;
+        opt.textContent = name;
+        areaSelect.appendChild(opt);
+      });
+
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('data-table').style.display = '';
+
+      applyAll();
+    })
+    .catch(err => {
+      document.getElementById('loading-state').textContent = 'Error loading data.json — ' + err.message;
+    });
+
+  /* ── Filter + sort + render pipeline ─────────────── */
+  function applyAll() {
+    const q      = document.getElementById('search-box').value.trim().toLowerCase();
+    const area   = document.getElementById('filter-area').value;
+    const pillar = document.getElementById('filter-pillar').value;
+    const cat    = document.getElementById('filter-category').value;
+
+    let rows = ALL_ROWS.filter(r => {
+      if (area   && r.areaId  !== area)   return false;
+      if (pillar && r.pillar  !== pillar) return false;
+      if (cat === '__null' && r.category !== null) return false;
+      if (cat && cat !== '__null' && r.category !== cat) return false;
+      if (q && !r.title.toLowerCase().includes(q) &&
+               !r.source.toLowerCase().includes(q) &&
+               !r.areaName.toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    // sort
+    rows.sort((a, b) => {
+      const av = (a[sortCol] ?? '').toString().toLowerCase();
+      const bv = (b[sortCol] ?? '').toString().toLowerCase();
+      return av < bv ? -sortDir : av > bv ? sortDir : 0;
+    });
+
+    renderTable(rows);
+  }
+
+  function renderTable(rows) {
+    const tbody = document.getElementById('table-body');
+    document.getElementById('row-count').textContent = rows.length.toLocaleString();
+
+    if (rows.length === 0) {
+      tbody.innerHTML = '<tr class="empty-row"><td colspan="6">No matching wins found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = rows.map((r, i) => {
+      const catHtml = r.category
+        ? `<span class="cat-chip">${escHtml(r.category)}</span>`
+        : `<span class="cat-null">—</span>`;
+
+      return `<tr>
+        <td class="col-num">${i + 1}</td>
+        <td class="col-area">
+          <div style="font-weight:600;font-size:.8rem">${escHtml(r.areaName)}</div>
+          <div style="color:var(--muted);font-size:.72rem;margin-top:2px">${escHtml(r.areaTitle)}</div>
+        </td>
+        <td class="col-pillar">
+          <span class="pillar-chip ${r.pillarChip}">${escHtml(r.pillarLabel)}</span>
+        </td>
+        <td class="col-cat">${catHtml}</td>
+        <td class="col-title">
+          <a class="win-link" href="${escAttr(r.url)}" target="_blank" rel="noopener">${escHtml(r.title)}</a>
+        </td>
+        <td class="col-source">
+          <span class="source-badge">${escHtml(r.source)}</span>
+        </td>
+      </tr>`;
+    }).join('');
+  }
+
+  /* ── Helpers ─────────────────────────────────────── */
+  function escHtml(s) {
+    return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escAttr(s) { return escHtml(s); }
+
+  /* ── Sort on header click ─────────────────────────── */
+  document.querySelectorAll('thead th[data-col]').forEach(th => {
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      if (sortCol === col) {
+        sortDir *= -1;
+      } else {
+        sortCol = col;
+        sortDir = 1;
+      }
+      document.querySelectorAll('thead th').forEach(h => {
+        h.classList.remove('sorted-asc', 'sorted-desc');
+      });
+      th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+      applyAll();
+    });
+  });
+
+  /* ── Live filters ─────────────────────────────────── */
+  document.getElementById('search-box').addEventListener('input', applyAll);
+  document.getElementById('filter-area').addEventListener('change', applyAll);
+  document.getElementById('filter-pillar').addEventListener('change', applyAll);
+  document.getElementById('filter-category').addEventListener('change', applyAll);
+
+  /* ── CSV Export ───────────────────────────────────── */
+  document.getElementById('btn-csv').addEventListener('click', () => {
+    const q      = document.getElementById('search-box').value.trim().toLowerCase();
+    const area   = document.getElementById('filter-area').value;
+    const pillar = document.getElementById('filter-pillar').value;
+    const cat    = document.getElementById('filter-category').value;
+
+    let rows = ALL_ROWS.filter(r => {
+      if (area   && r.areaId  !== area)   return false;
+      if (pillar && r.pillar  !== pillar) return false;
+      if (cat === '__null' && r.category !== null) return false;
+      if (cat && cat !== '__null' && r.category !== cat) return false;
+      if (q && !r.title.toLowerCase().includes(q) &&
+               !r.source.toLowerCase().includes(q) &&
+               !r.areaName.toLowerCase().includes(q)) return false;
+      return true;
+    });
+
+    const headers = ['#', 'Area', 'Pillar', 'Category', 'Title', 'Source', 'URL'];
+    const csvRows = [headers, ...rows.map((r, i) => [
+      i + 1,
+      r.areaName,
+      r.pillarLabel,
+      r.category ?? '',
+      r.title,
+      r.source,
+      r.url,
+    ])];
+
+    const csv = csvRows.map(row =>
+      row.map(cell => '"' + String(cell).replace(/"/g, '""') + '"').join(',')
+    ).join('\r\n');
+
+    const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = 'duke-climate-wins.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
